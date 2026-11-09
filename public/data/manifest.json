@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "instruments": "instruments.json",
+  "packs": [
+    {
+      "id": "demo",
+      "label": "演示数据包",
+      "origin": "demo",
+      "description": "词牌简介与词作正文据通行资料录入，未经善本校对；曲谱为本项目为演示播放功能编写的旋律，并非任何历史文献曲谱。",
+      "base": "demo/",
+      "files": {
+        "tunePatterns": "tune-patterns.json",
+        "authors": "authors.json",
+        "poems": "poems.json",
+        "scores": "scores.json",
+        "performances": "performances.json"
+      }
+    },
+    {
+      "id": "weishi",
+      "label": "《魏氏乐谱今译》文献数据包（待导入）",
+      "origin": "literature",
+      "description": "导入真实文献曲谱时启用此项，并在 weishi/ 目录下放置同结构的 JSON 文件。",
+      "base": "weishi/",
+      "enabled": false,
+      "files": {
+        "tunePatterns": "tune-patterns.json",
+        "poems": "poems.json",
+        "scores": "scores.json",
+        "performances": "performances.json"
+      }
+    }
+  ]
+}

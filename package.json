@@ -1,0 +1,28 @@
+{
+  "name": "hesiyi",
+  "version": "0.1.0",
+  "private": true,
+  "description": "合四一 · 中国古典词乐数字化平台（前端 Demo）",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -p tsconfig.json --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@fontsource/noto-serif-sc": "^5.3.1",
+    "lxgw-wenkai-webfont": "^1.7.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-router-dom": "^7.18.5"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.2.1",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.6"
+  }
+}

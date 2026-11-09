@@ -1,0 +1,90 @@
+[
+  {
+    "id": "demo-rumengling-changji",
+    "poemId": "rumengling-changji",
+    "tunePatternId": "rumengling",
+    "title": "如梦令 · 常记溪亭日暮（演示曲谱）",
+    "provenance": {
+      "origin": "demo",
+      "revisionStatus": "draft",
+      "editor": "合四一项目组",
+      "note": "为演示播放与逐字跟随功能编写的旋律，按字声大致安排腔格，并非《魏氏乐谱》或任何历史文献所载曲调。"
+    },
+    "key": { "tonic": "D", "tonicMidi": 62, "gongcheKey": "小工调", "shangDegree": 1 },
+    "meter": { "beatsPerBar": 4, "beatUnit": 4, "banyan": "一板三眼" },
+    "tempo": 66,
+    "tempoNote": "徐缓",
+    "notation": { "primary": "jianpu" },
+    "lyrics": "常记溪亭日暮，沉醉不知归路。兴尽晚回舟，误入藕花深处。争渡，争渡，惊起一滩鸥鹭。",
+    "tones": "平去平平入去 平去入平平去 去上上平平 去入上平平去 平去 平去 平上入平平去",
+    "toneSystem": "《广韵》中古四声（演示标注）",
+    "toneConfidence": "demo",
+    "jianpu": "3 5_ 6_~ 1' 6_ 5_~ | 3 2_ 3_~ 5~ - | 6, 1 3_ 2_ 1 | 6,_ 5,_~ 6,~ - - | 5 6_ 1'_~ 6 5 | 3_ 5_~ 3~ - 0 | 1' 6_ 5_ 6 1'_ 6_~ | 5 3_~ 2_~ 3~ - | 5 6_ 1'_~ 6 5_ 3_~ | 2 3_ 5_~ 6_ 0_ 5 | 6 5_~ 3_~ 2 3_~ 2_~ | 1~ - - 0",
+    "noteMarks": [
+      { "note": 1, "text": "「记」为去声字，演示旋律以上行两音处理。" },
+      { "note": 17, "text": "句末字延长成拖腔，收于低音「四」。" },
+      { "note": 46, "text": "演示用存疑标记：文献录入时，识读不确定的音以虚线圈标出并附说明。", "uncertain": true }
+    ],
+    "annotations": [
+      { "text": "工尺字按小工调（上 = 1）由简谱推导，板眼按拍位推定，仅供对照学习。" },
+      { "text": "声调依《广韵》反切推定，属演示标注，未经音韵学者校订。" }
+    ]
+  },
+  {
+    "id": "demo-yijiangnan-jiangnanhao",
+    "poemId": "yijiangnan-jiangnanhao",
+    "tunePatternId": "yijiangnan",
+    "title": "忆江南 · 江南好（演示曲谱）",
+    "provenance": {
+      "origin": "demo",
+      "revisionStatus": "draft",
+      "editor": "合四一项目组",
+      "note": "为演示播放功能编写的旋律，并非历史文献所载曲调。"
+    },
+    "key": { "tonic": "D", "tonicMidi": 62, "gongcheKey": "小工调", "shangDegree": 1 },
+    "meter": { "beatsPerBar": 2, "beatUnit": 4, "banyan": "一板一眼" },
+    "tempo": 69,
+    "tempoNote": "中速，轻快",
+    "notation": { "primary": "jianpu" },
+    "lyrics": "江南好，风景旧曾谙。日出江花红胜火，春来江水绿如蓝。能不忆江南？",
+    "tones": "平平上 平上去平平 入入平平平去上 平平平上入平平 平入入平平",
+    "toneSystem": "《广韵》中古四声（演示标注）",
+    "toneConfidence": "demo",
+    "jianpu": "3_ 5_~ 6 | 5 3_~ 2_~ | 3~ 0 | 6, 1 | 2 3_ 2_ | 1~ 6,_~ 1_~ | 2~ - | 3_ 5_ 6 | 1' 6_ 5_ | 3 5_~ 3_~ | 2~ 0 | 2_ 3_ 5 | 6_ 5_~ 3_ 0_ | 5 3_ 2_~ | 1~ - | 6, 1_ 2_ | 3 5_ 3_~ | 2_~ 3_~ 2_~ 6,_~ | 1~ -",
+    "noteMarks": [
+      { "note": 33, "text": "「绿」为入声字，演示旋律以短音后接休止表现入声的短促。" }
+    ],
+    "annotations": [
+      { "text": "工尺字按小工调（上 = 1）由简谱推导，板眼按拍位推定，仅供对照学习。" }
+    ]
+  },
+  {
+    "id": "demo-changxiangsi-bianshui",
+    "poemId": "changxiangsi-bianshui",
+    "tunePatternId": "changxiangsi",
+    "title": "长相思 · 汴水流（演示曲谱）",
+    "provenance": {
+      "origin": "demo",
+      "revisionStatus": "draft",
+      "editor": "合四一项目组",
+      "note": "为演示播放功能编写的旋律，并非历史文献所载曲调。"
+    },
+    "key": { "tonic": "D", "tonicMidi": 62, "gongcheKey": "小工调", "shangDegree": 1 },
+    "meter": { "beatsPerBar": 4, "beatUnit": 4, "banyan": "一板三眼" },
+    "tempo": 60,
+    "tempoNote": "缓慢，如诉",
+    "notation": { "primary": "jianpu" },
+    "lyrics": "汴水流，泗水流，流到瓜洲古渡头。吴山点点愁。／思悠悠，恨悠悠，恨到归时方始休。月明人倚楼。",
+    "tones": "去上平 去上平 平去平平上去平 平平上上平 平平平 去平平 去去平平平上平 入平平上平",
+    "toneSystem": "《广韵》中古四声（演示标注）",
+    "toneConfidence": "demo",
+    "jianpu": "6 5_ 6_~ 1' - | 2' 1'_ 6_~ 5 - | 6 1'_ 6_ 5 3 | 5_ 3_~ 2 3~ - | 6, 1 3_ 2_ 1_ 2_~ | 6,~ - - 0 | 1' 6_ 5_~ 6 - | 5 6_ 1'_~ 2' - | 1' 6_ 5_ 6 5_ 3_ | 2 3_~ 5_~ 3~ - | 6,_ 0_ 1 2 3_ 2_~ | 1 6,_~ 5,_~ 6,~ -",
+    "noteMarks": [
+      { "note": 25, "text": "「思」有平、去两读，此处依词意取平声。" }
+    ],
+    "annotations": [
+      { "text": "上下片旋律以羽音（6）收束，演示两段体的呼应。" },
+      { "text": "工尺字按小工调（上 = 1）由简谱推导，板眼按拍位推定，仅供对照学习。" }
+    ]
+  }
+]

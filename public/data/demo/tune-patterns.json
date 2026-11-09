@@ -1,0 +1,156 @@
+[
+  {
+    "id": "rumengling", "name": "如梦令", "aliases": ["忆仙姿", "宴桃源"],
+    "summary": "单调小令，以「如梦，如梦」一类二字叠句为标志，短促回环。",
+    "history": "原名《忆仙姿》，相传为后唐庄宗李存勖所创。苏轼以其词中有「如梦，如梦」叠句，改名《如梦令》。",
+    "wordCount": 33, "stanzaType": "单调", "tags": ["常见"],
+    "meter": {
+      "description": "单调三十三字，七句五仄韵一叠韵",
+      "stanzas": [[
+        { "pattern": "中仄中平中仄", "mark": "rhyme" },
+        { "pattern": "中仄中平平仄", "mark": "rhyme" },
+        { "pattern": "中仄仄平平", "mark": "none" },
+        { "pattern": "中仄中平平仄", "mark": "rhyme" },
+        { "pattern": "平仄", "mark": "rhyme" },
+        { "pattern": "平仄", "mark": "repeat" },
+        { "pattern": "中仄中平平仄", "mark": "rhyme" }
+      ]],
+      "rhymeNote": "押仄声韵；第五、六句为二字叠句。",
+      "source": "参照通行词谱整理，平仄以「中」表示可平可仄",
+      "verified": false
+    },
+    "provenance": { "origin": "demo", "revisionStatus": "unverified", "note": "据通行词谱资料整理，待与《钦定词谱》核对" }
+  },
+  {
+    "id": "yijiangnan", "name": "忆江南", "aliases": ["望江南", "梦江南", "江南好"],
+    "summary": "唐教坊曲，单调五句，明快易歌；宋人多叠为双调。",
+    "history": "本名《望江南》，一说原名《谢秋娘》。白居易作《忆江南》三首后，此调亦以「忆江南」名之。",
+    "wordCount": 27, "stanzaType": "单调", "wordCountNote": "单调二十七字；宋人多作双调五十四字", "tags": ["常见"],
+    "meter": {
+      "description": "单调二十七字，五句三平韵",
+      "stanzas": [[
+        { "pattern": "中平仄", "mark": "none" },
+        { "pattern": "中仄仄平平", "mark": "rhyme" },
+        { "pattern": "中仄中平平仄仄", "mark": "none" },
+        { "pattern": "中平中仄仄平平", "mark": "rhyme" },
+        { "pattern": "中仄仄平平", "mark": "rhyme" }
+      ]],
+      "rhymeNote": "押平声韵；中间七言两句宜对仗。",
+      "source": "参照通行词谱整理，平仄以「中」表示可平可仄",
+      "verified": false
+    },
+    "provenance": { "origin": "demo", "revisionStatus": "unverified", "note": "据通行词谱资料整理，待与《钦定词谱》核对" }
+  },
+  {
+    "id": "changxiangsi", "name": "长相思", "aliases": ["双红豆", "忆多娇"],
+    "summary": "双调小令，前后段句式相同，多用叠字叠韵，音节回环。",
+    "history": "唐教坊曲名，调名取南朝乐府「上言长相思」句意。",
+    "wordCount": 36, "stanzaType": "双调", "tags": ["常见"],
+    "meter": null,
+    "provenance": { "origin": "demo", "revisionStatus": "unverified", "note": "据通行词谱资料整理，待核对" }
+  },
+  {
+    "id": "pusaman", "name": "菩萨蛮", "aliases": ["子夜歌", "重叠金"],
+    "summary": "双调小令，上下片各两仄韵、两平韵，平仄韵交替转换。",
+    "history": "唐教坊曲名。苏鹗《杜阳杂编》载，唐宣宗大中初女蛮国入贡，其人危髻金冠、璎珞被体，号「菩萨蛮队」，倡优遂制此曲。",
+    "wordCount": 44, "stanzaType": "双调", "tags": ["常见"],
+    "meter": null,
+    "provenance": { "origin": "demo", "revisionStatus": "unverified", "note": "据通行词谱资料整理，待核对" }
+  },
+  {
+    "id": "busuanzi", "name": "卜算子", "aliases": ["百尺楼", "缺月挂疏桐"],
+    "summary": "双调小令，上下片各两仄韵，句式五五七五。",
+    "history": "调名来源说法不一，一说取义于卖卜算命之人。",
+    "wordCount": 44, "stanzaType": "双调",
+    "meter": null,
+    "provenance": { "origin": "demo", "revisionStatus": "unverified", "note": "据通行词谱资料整理，待核对" }
+  },
+  {
+    "id": "huanxisha", "name": "浣溪沙", "aliases": ["浣纱溪", "小庭花"],
+    "summary": "双调小令，全用七言句，上片三平韵，下片两平韵，下片首两句多对仗。",
+    "history": "唐教坊曲名，相传因西施浣纱于若耶溪而得名。",
+    "wordCount": 42, "stanzaType": "双调", "tags": ["常见"],
+    "meter": null,
+    "provenance": { "origin": "demo", "revisionStatus": "unverified", "note": "据通行词谱资料整理，待核对" }
+  },
+  {
+    "id": "xijiangyue", "name": "西江月", "aliases": ["白苹香", "步虚词"],
+    "summary": "双调小令，上下片各两平韵，结句押同部仄韵，平仄通叶。",
+    "history": "唐教坊曲名，调名取李白「只今惟有西江月」句。",
+    "wordCount": 50, "stanzaType": "双调", "tags": ["常见"],
+    "meter": null,
+    "provenance": { "origin": "demo", "revisionStatus": "unverified", "note": "据通行词谱资料整理，待核对" }
+  },
+  {
+    "id": "yumeiren", "name": "虞美人", "aliases": ["一江春水", "玉壶水"],
+    "summary": "双调小令，上下片各两仄韵、两平韵，结句九言，情致绵长。",
+    "history": "唐教坊曲名，初咏项羽宠姬虞美人，因以为名。",
+    "wordCount": 56, "stanzaType": "双调", "tags": ["常见"],
+    "meter": null,
+    "provenance": { "origin": "demo", "revisionStatus": "unverified", "note": "据通行词谱资料整理，待核对" }
+  },
+  {
+    "id": "queqiaoxian", "name": "鹊桥仙", "aliases": ["金风玉露相逢曲"],
+    "summary": "双调小令，上下片各两仄韵，多咏七夕牛女相会。",
+    "history": "调名源于牛郎织女鹊桥相会的传说。",
+    "wordCount": 56, "stanzaType": "双调",
+    "meter": null,
+    "provenance": { "origin": "demo", "revisionStatus": "unverified", "note": "据通行词谱资料整理，待核对" }
+  },
+  {
+    "id": "linjiangxian", "name": "临江仙", "aliases": ["谢新恩", "雁后归"],
+    "summary": "双调，体式较多，上下片各三平韵，句法舒展。",
+    "history": "唐教坊曲名，初多咏水仙，故名。",
+    "wordCount": 58, "stanzaType": "双调", "wordCountNote": "有五十四、五十八、六十字等多体；晏几道「梦后楼台」为五十八字体", "tags": ["常见"],
+    "meter": null,
+    "provenance": { "origin": "demo", "revisionStatus": "unverified", "note": "据通行词谱资料整理，待核对" }
+  },
+  {
+    "id": "dielianhua", "name": "蝶恋花", "aliases": ["鹊踏枝", "凤栖梧"],
+    "summary": "双调中调，上下片各四仄韵，句式相同，宜于抒写缠绵之情。",
+    "history": "原名《鹊踏枝》，后改今名，取梁简文帝「翻阶蛱蝶恋花情」句意。",
+    "wordCount": 60, "stanzaType": "双调", "tags": ["常见"],
+    "meter": null,
+    "provenance": { "origin": "demo", "revisionStatus": "unverified", "note": "据通行词谱资料整理，待核对" }
+  },
+  {
+    "id": "qingyuan", "name": "青玉案", "aliases": ["横塘路"],
+    "summary": "双调中调，上下片各五仄韵，句法参差。",
+    "history": "调名取东汉张衡《四愁诗》「美人赠我锦绣段，何以报之青玉案」句。",
+    "wordCount": 67, "stanzaType": "双调",
+    "meter": null,
+    "provenance": { "origin": "demo", "revisionStatus": "unverified", "note": "据通行词谱资料整理，待核对" }
+  },
+  {
+    "id": "manjianghong", "name": "满江红", "aliases": ["上江虹", "念良游"],
+    "summary": "双调长调，通行体押仄声入韵，声情激越。",
+    "history": "宋人多用此调抒写怀抱，通行体以入声韵为多。",
+    "wordCount": 93, "stanzaType": "双调", "wordCountNote": "通行体九十三字，另有平韵体", "tags": ["常见"],
+    "meter": null,
+    "provenance": { "origin": "demo", "revisionStatus": "unverified", "note": "据通行词谱资料整理，待核对" }
+  },
+  {
+    "id": "shuidiaogetou", "name": "水调歌头", "aliases": ["元会曲", "台城游"],
+    "summary": "双调长调，上下片各四平韵，句法长短错落。",
+    "history": "取大曲《水调》开头一章另制新词，「歌头」即大曲的首段。",
+    "wordCount": 95, "stanzaType": "双调", "tags": ["常见"],
+    "meter": null,
+    "provenance": { "origin": "demo", "revisionStatus": "unverified", "note": "据通行词谱资料整理，待核对" }
+  },
+  {
+    "id": "niannujiao", "name": "念奴娇", "aliases": ["百字令", "酹江月", "大江东去"],
+    "summary": "双调长调，正体一百字，上下片各四仄韵。",
+    "history": "念奴为唐天宝年间著名歌伎，调名由此而来。苏轼「大江东去」一首后，别名甚多。",
+    "wordCount": 100, "stanzaType": "双调", "tags": ["常见"],
+    "meter": null,
+    "provenance": { "origin": "demo", "revisionStatus": "unverified", "note": "据通行词谱资料整理，待核对" }
+  },
+  {
+    "id": "yangzhouman", "name": "扬州慢", "aliases": [],
+    "summary": "姜夔自度曲，双调长调，上下片各四平韵。",
+    "history": "姜夔词前小序自述淳熙丙申（1176）冬至过扬州、感慨今昔而自度此曲。《白石道人歌曲》存有此词旁谱，为宋代词乐的珍贵遗存。",
+    "wordCount": 98, "stanzaType": "双调",
+    "meter": null,
+    "provenance": { "origin": "demo", "revisionStatus": "unverified", "note": "据通行词谱资料整理，待核对" }
+  }
+]

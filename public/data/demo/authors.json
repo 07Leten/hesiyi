@@ -1,0 +1,14 @@
+[
+  { "id": "bai-juyi", "name": "白居易", "courtesyName": "乐天", "dynasty": "唐", "lifespan": "772—846", "bio": "字乐天，号香山居士。中唐诗人，晚年所作《忆江南》等小令，是文人填词的早期名篇。", "provenance": { "origin": "demo", "revisionStatus": "unverified" } },
+  { "id": "wen-tingyun", "name": "温庭筠", "courtesyName": "飞卿", "dynasty": "唐", "lifespan": "约812—约866", "bio": "本名岐，字飞卿。晚唐词人，精通音律，词风秾丽，《花间集》以其词居首。", "provenance": { "origin": "demo", "revisionStatus": "unverified" } },
+  { "id": "li-yu", "name": "李煜", "courtesyName": "重光", "dynasty": "五代", "period": "南唐", "lifespan": "937—978", "bio": "字重光，南唐后主。亡国后所作词多写故国之思，语言自然而感慨深沉。", "provenance": { "origin": "demo", "revisionStatus": "unverified" } },
+  { "id": "yan-shu", "name": "晏殊", "courtesyName": "同叔", "dynasty": "宋", "period": "北宋", "lifespan": "991—1055", "bio": "字同叔，抚州临川人。北宋前期重要词人，词风温润闲雅，有《珠玉词》。", "provenance": { "origin": "demo", "revisionStatus": "unverified" } },
+  { "id": "liu-yong", "name": "柳永", "courtesyName": "耆卿", "dynasty": "宋", "period": "北宋", "lifespan": "约984—约1053", "bio": "原名三变，字耆卿。精通音律，大量创作慢词长调，有《乐章集》。", "provenance": { "origin": "demo", "revisionStatus": "unverified" } },
+  { "id": "su-shi", "name": "苏轼", "courtesyName": "子瞻", "dynasty": "宋", "period": "北宋", "lifespan": "1037—1101", "bio": "字子瞻，号东坡居士。拓展了词的题材与境界，开豪放一路。", "provenance": { "origin": "demo", "revisionStatus": "unverified" } },
+  { "id": "yan-jidao", "name": "晏几道", "courtesyName": "叔原", "dynasty": "宋", "period": "北宋", "lifespan": "1038—1110", "bio": "字叔原，号小山，晏殊之子。工于小令，有《小山词》。", "provenance": { "origin": "demo", "revisionStatus": "unverified" } },
+  { "id": "qin-guan", "name": "秦观", "courtesyName": "少游", "dynasty": "宋", "period": "北宋", "lifespan": "1049—1100", "bio": "字少游，号淮海居士，苏门四学士之一。词风婉约清丽。", "provenance": { "origin": "demo", "revisionStatus": "unverified" } },
+  { "id": "li-qingzhao", "name": "李清照", "dynasty": "宋", "period": "两宋之际", "lifespan": "1084—约1155", "bio": "号易安居士，济南章丘人。婉约词代表作家，论词主张「别是一家」。", "provenance": { "origin": "demo", "revisionStatus": "unverified" } },
+  { "id": "yue-fei", "name": "岳飞", "courtesyName": "鹏举", "dynasty": "宋", "period": "南宋", "lifespan": "1103—1142", "bio": "字鹏举，南宋抗金名将。《满江红·写怀》传为其作，作者归属学界尚有争议。", "provenance": { "origin": "demo", "revisionStatus": "unverified" } },
+  { "id": "xin-qiji", "name": "辛弃疾", "courtesyName": "幼安", "dynasty": "宋", "period": "南宋", "lifespan": "1140—1207", "bio": "字幼安，号稼轩。南宋词人，与苏轼并称「苏辛」。", "provenance": { "origin": "demo", "revisionStatus": "unverified" } },
+  { "id": "jiang-kui", "name": "姜夔", "courtesyName": "尧章", "dynasty": "宋", "period": "南宋", "lifespan": "约1155—约1221", "bio": "字尧章，号白石道人。精通音律，多自度曲，《白石道人歌曲》存有其词的旁谱，是研究宋代词乐的重要文献。", "provenance": { "origin": "demo", "revisionStatus": "unverified" } }
+]

@@ -1,0 +1,45 @@
+[
+  { "id": "perf-rml-qin", "scoreId": "demo-rumengling-changji", "title": "古琴独奏",
+    "layers": [ { "instrumentId": "guqin", "presetId": "songchen", "gain": 0.95, "octaveShift": -12 } ],
+    "source": { "kind": "synth", "note": "浏览器实时合成，非真人录音" },
+    "provenance": { "origin": "demo", "revisionStatus": "draft" } },
+  { "id": "perf-rml-xiaoqin", "scoreId": "demo-rumengling-changji", "title": "箫琴合奏",
+    "layers": [
+      { "instrumentId": "xiao", "presetId": "zizhu", "gain": 0.7, "octaveShift": 0 },
+      { "instrumentId": "guqin", "presetId": "songchen", "gain": 0.7, "octaveShift": -12 }
+    ],
+    "source": { "kind": "synth", "note": "浏览器实时合成，非真人录音" },
+    "provenance": { "origin": "demo", "revisionStatus": "draft" } },
+  { "id": "perf-rml-sizhu", "scoreId": "demo-rumengling-changji", "title": "丝竹小合奏",
+    "layers": [
+      { "instrumentId": "dizi", "presetId": "qudi", "gain": 0.4, "octaveShift": 12 },
+      { "instrumentId": "guzheng", "presetId": "mingliang", "gain": 0.6, "octaveShift": 0 },
+      { "instrumentId": "erhu", "presetId": "shuqing", "gain": 0.42, "octaveShift": 0 }
+    ],
+    "source": { "kind": "synth", "note": "浏览器实时合成，非真人录音" },
+    "provenance": { "origin": "demo", "revisionStatus": "draft" } },
+
+  { "id": "perf-yjn-pipa", "scoreId": "demo-yijiangnan-jiangnanhao", "title": "琵琶独奏",
+    "layers": [ { "instrumentId": "pipa", "presetId": "lunzhi", "gain": 0.75, "octaveShift": 0 } ],
+    "source": { "kind": "synth", "note": "浏览器实时合成，非真人录音" },
+    "provenance": { "origin": "demo", "revisionStatus": "draft" } },
+  { "id": "perf-yjn-dizheng", "scoreId": "demo-yijiangnan-jiangnanhao", "title": "笛筝合奏",
+    "layers": [
+      { "instrumentId": "dizi", "presetId": "qudi", "gain": 0.42, "octaveShift": 12 },
+      { "instrumentId": "guzheng", "presetId": "mingliang", "gain": 0.6, "octaveShift": 0 }
+    ],
+    "source": { "kind": "synth", "note": "浏览器实时合成，非真人录音" },
+    "provenance": { "origin": "demo", "revisionStatus": "draft" } },
+
+  { "id": "perf-cxs-xiao", "scoreId": "demo-changxiangsi-bianshui", "title": "洞箫独奏",
+    "layers": [ { "instrumentId": "xiao", "presetId": "zizhu", "gain": 0.85, "octaveShift": 0 } ],
+    "source": { "kind": "synth", "note": "浏览器实时合成，非真人录音" },
+    "provenance": { "origin": "demo", "revisionStatus": "draft" } },
+  { "id": "perf-cxs-huqin", "scoreId": "demo-changxiangsi-bianshui", "title": "二胡与古琴",
+    "layers": [
+      { "instrumentId": "erhu", "presetId": "shuqing", "gain": 0.5, "octaveShift": 0 },
+      { "instrumentId": "guqin", "presetId": "qingrun", "gain": 0.7, "octaveShift": -12 }
+    ],
+    "source": { "kind": "synth", "note": "浏览器实时合成，非真人录音" },
+    "provenance": { "origin": "demo", "revisionStatus": "draft" } }
+]

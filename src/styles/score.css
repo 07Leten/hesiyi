@@ -1,0 +1,708 @@
+/* =========================================================
+ * 曲谱
+ * 当前音以朱笔圈出；已唱过的字墨色转深，未唱的字为淡墨
+ * ========================================================= */
+
+.score-paper {
+  background: var(--paper-hi);
+  border: 1px solid var(--rule);
+  padding: 1.5rem 1.3rem 1rem;
+  overflow-x: auto;
+}
+
+.score-paper.is-small {
+  padding: 0.9rem 0.8rem 0.4rem;
+}
+
+:root {
+  --ring: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><path d='M30.5 8.5C25 4.2 13.5 4.6 8.6 11.3 3.9 17.8 6.3 29.4 14.4 33.4c7.6 3.8 18.2.6 20.6-7.4 1.9-6.3-.8-13.4-6.9-16.5' fill='none' stroke='%23a8433a' stroke-width='2.3' stroke-linecap='round'/></svg>");
+}
+
+.score-view {
+  --gc-h: 0em;
+  font-size: 16px;
+}
+
+.score-view.is-compact {
+  font-size: 14px;
+}
+
+/* ---------- 简谱 ---------- */
+
+.jp-sheet.is-dual {
+  --gc-h: 1.6em;
+}
+
+/* 一句为一组，宽度够时数句同行，窄屏时句内再折行 */
+.jp-sheet {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 1.5em 1.3em;
+}
+
+.jp-row {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 0.9em;
+  max-width: 100%;
+}
+
+.jp-bar {
+  display: inline-flex;
+  align-items: flex-start;
+}
+
+.nc {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 1.9em;
+  margin: 0 0.42em 0 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font-family: var(--font-score);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.nc.tight {
+  margin-right: 0;
+}
+
+button.nc:hover .nc-num {
+  color: var(--cinnabar);
+}
+
+.nc-gc {
+  height: var(--gc-h);
+  display: flex;
+  align-items: center;
+  gap: 0.05em;
+  font-family: var(--font-serif);
+  font-size: 0.86em;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+.jp-sheet:not(.is-dual) .nc-gc {
+  display: none;
+}
+
+.nc-by {
+  font-style: normal;
+  color: var(--cinnabar);
+  font-size: 0.9em;
+  margin-left: 0.05em;
+}
+
+.nc-hi,
+.nc-lo {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 0.55em;
+  font-size: 1em;
+}
+
+.nc-lo {
+  height: 0.8em;
+  align-items: flex-end;
+}
+
+.nc-hi i,
+.nc-lo i {
+  font-style: normal;
+  font-size: 0.7em;
+  line-height: 0.6;
+  letter-spacing: -0.1em;
+}
+
+.nc-digit {
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1.85em;
+}
+
+.nc-num {
+  font-size: 1.36em;
+  line-height: 1;
+  transition: color 0.15s;
+}
+
+.nc-dot {
+  font-style: normal;
+  font-size: 1.1em;
+  margin-left: 0.05em;
+}
+
+.nc-acc {
+  font-size: 0.7em;
+  margin-right: 0.05em;
+  align-self: flex-start;
+  margin-top: 0.25em;
+}
+
+.nc.is-rest .nc-num,
+.nc-dash .nc-num {
+  color: var(--ink-2);
+}
+
+/* 时值下划线：同一拍内相邻音的线相连 */
+.nc.ul-1 .nc-digit::after,
+.nc.ul-2 .nc-digit::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1.3px;
+  background: currentColor;
+}
+
+.nc.ul-2 .nc-digit::after {
+  box-shadow: 0 4px 0 currentColor;
+}
+
+.nc.ul-start .nc-digit::after {
+  left: 0.3em;
+}
+
+.nc.ul-end .nc-digit::after {
+  right: 0.3em;
+}
+
+/* 连音弧线：一字多音 */
+.nc.slur-start::before,
+.nc.slur-mid::before,
+.nc.slur-end::before,
+.jp-barline.slur-mid::before {
+  content: '';
+  position: absolute;
+  top: calc(var(--gc-h) - 0.1em);
+  height: 0.5em;
+  border-top: 1.2px solid var(--ink-3);
+  pointer-events: none;
+}
+
+.nc.slur-start::before {
+  left: 50%;
+  right: 0;
+  border-left: 1.2px solid var(--ink-3);
+  border-top-left-radius: 0.7em 0.5em;
+}
+
+.nc.slur-mid::before {
+  left: 0;
+  right: -0.42em;
+}
+
+.nc.slur-mid.tight::before {
+  right: 0;
+}
+
+.nc.slur-end::before {
+  left: 0;
+  right: 50%;
+  border-right: 1.2px solid var(--ink-3);
+  border-top-right-radius: 0.7em 0.5em;
+}
+
+.jp-barline.slur-mid::before {
+  left: 0;
+  right: 0;
+}
+
+.nc.slur-start:not(.tight)::before {
+  right: -0.42em;
+}
+
+/* 小节线 */
+.jp-barline {
+  position: relative;
+  width: 0.8em;
+  align-self: stretch;
+  flex-shrink: 0;
+  margin-right: 0.35em;
+}
+
+.jp-barline i {
+  position: absolute;
+  left: 0.2em;
+  top: calc(var(--gc-h) + 0.45em);
+  height: 2.3em;
+  width: 1px;
+  background: var(--ink-2);
+}
+
+.jp-barline.is-final i {
+  width: 5px;
+  background: none;
+  border-left: 1px solid var(--ink);
+  border-right: 3px solid var(--ink);
+}
+
+/* 歌词与声调 */
+.nc-lyric {
+  position: relative;
+  width: 1.3em;
+  height: 1.3em;
+  margin-top: 0.45em;
+  font-family: var(--font-display);
+  font-size: 1.14em;
+  line-height: 1.3;
+  text-align: center;
+  color: var(--ink);
+  transition: color 0.2s;
+}
+
+.nc-tone {
+  height: 1.3em;
+  margin-top: 0.15em;
+  font-size: 0.72em;
+  line-height: 1.3;
+  color: var(--ink-3);
+}
+
+/* 跟随 */
+.score-view.is-following .nc .nc-lyric {
+  color: var(--ink-4);
+}
+
+.score-view.is-following .nc.is-past .nc-lyric {
+  color: var(--ink);
+}
+
+.score-view.is-following .nc.is-current-syl .nc-lyric {
+  color: var(--cinnabar);
+}
+
+.nc.is-active .nc-num,
+.nc-dash.is-held .nc-num {
+  color: var(--cinnabar);
+}
+
+.nc.is-active .nc-digit::before,
+.gc-note.is-active .gc-glyph::before,
+.gc-char.is-active::before {
+  content: '';
+  position: absolute;
+  inset: -0.12em -0.05em;
+  background: var(--ring) center / contain no-repeat;
+  pointer-events: none;
+  animation: ring-in 0.22s var(--ease);
+}
+
+.gc-note.is-active .gc-glyph::before {
+  inset: -0.32em -0.35em;
+}
+
+.gc-char.is-active::before {
+  inset: -0.12em;
+}
+
+@keyframes ring-in {
+  from {
+    transform: scale(0.7) rotate(-25deg);
+    opacity: 0;
+  }
+}
+
+/* 存疑音 */
+.nc.is-uncertain .nc-num {
+  outline: 1px dashed var(--cinnabar);
+  outline-offset: 2px;
+  border-radius: 50%;
+}
+
+.nc-mark {
+  position: absolute;
+  top: 0.05em;
+  right: -0.15em;
+  font-size: 0.58em;
+  font-family: var(--font-sans);
+  color: var(--celadon-3);
+  line-height: 1;
+}
+
+.nc-mark.is-q {
+  color: var(--cinnabar);
+}
+
+/* ---------- 工尺谱（竖排，右起） ---------- */
+
+.gc-sheet {
+  display: flex;
+  direction: rtl;
+  gap: 0;
+  overflow-x: auto;
+  padding: 0.2rem 0 0.8rem;
+}
+
+.gc-col {
+  direction: ltr;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4em;
+  padding: 0.3em 0.9em 0.3em 0.7em;
+  border-left: 1px solid var(--rule);
+  flex-shrink: 0;
+}
+
+.gc-col:first-child {
+  border-right: 1px solid var(--rule);
+}
+
+.gc-unit {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.2em;
+  min-height: 2.4em;
+}
+
+.gc-char {
+  position: relative;
+  width: 1.45em;
+  height: 1.45em;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: var(--font-display);
+  font-size: 1.62em;
+  line-height: 1.45;
+  text-align: center;
+  color: var(--ink);
+  transition: color 0.2s;
+}
+
+.gc-char:disabled {
+  cursor: default;
+}
+
+.gc-punct {
+  position: absolute;
+  right: -0.32em;
+  bottom: -0.2em;
+  font-size: 0.55em;
+  color: var(--ink-3);
+}
+
+.score-view.is-following .gc-char {
+  color: var(--ink-4);
+}
+
+.score-view.is-following .gc-char.is-past {
+  color: var(--ink);
+}
+
+.score-view.is-following .gc-char.is-active {
+  color: var(--cinnabar);
+}
+
+.gc-notes {
+  display: flex;
+  flex-direction: column;
+  padding-top: 0.12em;
+}
+
+.gc-note {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.05em;
+  padding: 0 0.1em;
+  border: 0;
+  background: none;
+  font-family: var(--font-serif);
+  font-size: 1em;
+  line-height: 1.42;
+  color: var(--ink);
+}
+
+.gc-note:hover .gc-glyph {
+  color: var(--cinnabar);
+}
+
+.gc-glyph {
+  position: relative;
+  min-width: 1.1em;
+  text-align: center;
+}
+
+.gc-note.is-active .gc-glyph {
+  color: var(--cinnabar);
+}
+
+.gc-note.is-original .gc-glyph {
+  font-weight: 700;
+}
+
+.gc-note.is-rest .gc-glyph {
+  min-height: 1em;
+}
+
+.gc-note.is-uncertain .gc-glyph {
+  outline: 1px dashed var(--cinnabar);
+  outline-offset: 1px;
+  border-radius: 50%;
+}
+
+.gc-by {
+  width: 0.9em;
+  color: var(--cinnabar);
+  font-size: 0.92em;
+}
+
+.gc-oct {
+  font-size: 0.5em;
+  color: var(--ink-3);
+  vertical-align: super;
+  margin-left: 0.05em;
+}
+
+.gc-tone {
+  font-size: 0.72em;
+  color: var(--ink-3);
+  padding-top: 0.5em;
+}
+
+/* ---------- 注释 ---------- */
+
+.score-notes {
+  margin-top: 1.2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.9rem;
+}
+
+.score-notes h4 {
+  font-size: 0.92rem;
+  letter-spacing: 0.2em;
+  margin-bottom: 0.5rem;
+}
+
+.score-notes ol {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.7rem;
+}
+
+.score-notes li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: baseline;
+  padding: 0.3rem 0;
+  border-bottom: 1px dotted var(--rule);
+}
+
+.score-notes li b {
+  color: var(--celadon-3);
+  margin-right: 0.15em;
+}
+
+.score-notes li.is-q b {
+  color: var(--cinnabar);
+}
+
+.score-notes-general {
+  color: var(--ink-2);
+  margin: 0.3rem 0 0;
+  padding-left: 0.8em;
+  border-left: 2px solid var(--rule-2);
+}
+
+/* =========================================================
+ * 竖排正文（乌丝栏）
+ * ========================================================= */
+
+.vpoem {
+  --col: 2.15em;
+  writing-mode: vertical-rl;
+  block-size: auto;
+  inline-size: 11.6em;
+  max-width: 100%;
+  padding: 1.3rem 1.1rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--rule-2) transparent;
+  font-family: var(--font-display);
+  font-size: 1.28rem;
+  line-height: var(--col);
+  letter-spacing: 0.16em;
+  color: var(--ink);
+  overflow-x: auto;
+  background-image: repeating-linear-gradient(to left, transparent 0 calc(var(--col) - 1px), rgba(168, 67, 58, 0.22) calc(var(--col) - 1px) var(--col));
+  background-origin: content-box;
+  background-clip: content-box;
+  background-attachment: local;
+}
+
+.vpoem-lg {
+  font-size: 1.42rem;
+}
+
+.vpoem.is-flow {
+  inline-size: 15.2em;
+}
+
+.vpoem-lg.is-flow {
+  font-size: 1.3rem;
+}
+
+.vpoem-line {
+  margin: 0;
+}
+
+.vpoem-gap {
+  block-size: var(--col);
+}
+
+.vpoem-char {
+  position: relative;
+  display: inline;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  color: inherit;
+  transition: color 0.2s;
+}
+
+button.vpoem-char:hover {
+  color: var(--cinnabar);
+}
+
+.vpoem-punct {
+  color: var(--ink-3);
+}
+
+.vpoem.is-following .vpoem-char {
+  color: var(--ink-4);
+}
+
+.vpoem.is-following .vpoem-char.is-past {
+  color: var(--ink);
+}
+
+.vpoem .vpoem-char.is-active {
+  color: var(--cinnabar);
+}
+
+/* 圈点：在字的右侧加朱圈 */
+.vpoem .vpoem-char.is-active::after {
+  content: '';
+  position: absolute;
+  right: -0.32em;
+  top: 0.28em;
+  width: 0.26em;
+  height: 0.26em;
+  border: 1.6px solid var(--cinnabar);
+  border-radius: 50%;
+}
+
+/* ---------- 四声圈发 ---------- */
+
+.tone-mark {
+  position: absolute;
+  width: 0.3em;
+  height: 0.3em;
+  border: 1.3px solid var(--cinnabar);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.tone-ll {
+  left: -0.1em;
+  bottom: 0.02em;
+}
+
+.tone-ul {
+  left: -0.1em;
+  top: 0.02em;
+}
+
+.tone-ur {
+  right: -0.1em;
+  top: 0.02em;
+}
+
+.tone-lr {
+  right: -0.1em;
+  bottom: 0.02em;
+}
+
+.vpoem .tone-mark {
+  width: 0.26em;
+  height: 0.26em;
+}
+
+.vpoem .tone-ll,
+.vpoem .tone-lr {
+  bottom: 0.18em;
+}
+
+/* ---------- 格律图 ---------- */
+
+.meter-desc {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--ink-2);
+}
+
+.meter-stanza {
+  list-style: none;
+  padding: 0.6rem 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.6rem;
+}
+
+.meter-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.meter-glyphs {
+  display: inline-flex;
+  gap: 0.1em;
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
+}
+
+.mg-平 {
+  color: var(--ink-2);
+}
+
+.mg-中 {
+  color: var(--ink-3);
+}
+
+.meter-mark {
+  font-family: var(--font-display);
+  font-size: 0.84rem;
+  color: var(--ink-3);
+}
+
+.meter-mark.mark-rhyme,
+.meter-mark.mark-repeat {
+  color: var(--cinnabar);
+}
+
+.meter-legend,
+.meter-source {
+  font-size: 0.82rem;
+  color: var(--ink-3);
+  margin: 0.2rem 0 0;
+}
