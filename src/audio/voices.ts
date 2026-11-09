@@ -1,6 +1,7 @@
 import type { InstrumentPreset } from '../data/types';
 import { bowedVoice } from './synth/bowed';
 import { num, type NoteSpec, type Voice } from './synth/common';
+import { pianoVoice } from './synth/piano';
 import { pluckVoice } from './synth/pluck';
 import { windVoice } from './synth/wind';
 
@@ -12,6 +13,8 @@ export function startVoice(ctx: BaseAudioContext, out: AudioNode, preset: Instru
       return windVoice(ctx, out, preset.params, s);
     case 'bowed':
       return bowedVoice(ctx, out, preset.params, s);
+    case 'piano':
+      return pianoVoice(ctx, out, preset.params, cacheKey, s);
   }
 }
 

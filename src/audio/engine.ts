@@ -3,6 +3,7 @@ import type { InstrumentPreset } from '../data/types';
 import { buildMaster, type MasterBus } from './master';
 import { playEventOnLayers, type NoteEvent, type ResolvedLayer } from './sequence';
 import type { Voice } from './synth/common';
+import { warmPiano } from './synth/piano';
 import { clapper, startVoice } from './voices';
 
 export interface EngineState {
@@ -34,6 +35,7 @@ export class PlaybackEngine {
   private pausedBeat = 0;
   private nextIdx = 0;
   private timer: ReturnType<typeof setInterval> | null = null;
+  private playGen = 0;
 
   private voices = new Map<string, Set<Voice>>();
   private lastVoice = new Map<string, Voice>();
@@ -143,8 +145,13 @@ export class PlaybackEngine {
 
   async play() {
     if (!this.events.length) return;
+    const gen = ++this.playGen;
     const ctx = this.ensureContext();
     if (ctx.state !== 'running') await ctx.resume();
+    if (gen !== this.playGen) return;
+    // 先把钢琴要用到的音高合成好，避免播放过程中在主线程上现算
+    await this.warmPianoLayers();
+    if (gen !== this.playGen) return;
     for (const l of this.layers) this.layerNode(l.instrumentId).gain.value = l.gain;
     if (this.pausedBeat >= this.totalBeats - 1e-6) this.pausedBeat = 0;
     this.anchorBeat = this.pausedBeat;
@@ -158,6 +165,7 @@ export class PlaybackEngine {
   }
 
   pause() {
+    this.playGen += 1;
     if (!this.state.playing) return;
     this.pausedBeat = this.getBeat();
     this.clearTimer();
@@ -260,6 +268,33 @@ export class PlaybackEngine {
       set.clear();
     }
     this.lastVoice.clear();
+  }
+
+  /** 按当前曲目与音色，把钢琴音高分批合成进缓存。每批控制在一帧以内 */
+  private async warmPianoLayers() {
+    const ctx = this.ctx;
+    if (!ctx) return;
+    const seen = new Set<string>();
+    const jobs: { freq: number; key: string; params: ResolvedLayer['preset']['params'] }[] = [];
+    for (const layer of this.layers) {
+      if (!layer.enabled || layer.preset.engine !== 'piano') continue;
+      const key = `${layer.instrumentId}:${layer.preset.id}`;
+      for (const ev of this.events) {
+        const freq = midiToFreq(ev.midi + layer.octaveShift);
+        const id = `${key}|${Math.round(69 + 12 * Math.log2(freq / 440))}`;
+        if (seen.has(id)) continue;
+        seen.add(id);
+        jobs.push({ freq, key, params: layer.preset.params });
+      }
+    }
+    let slice = performance.now();
+    for (const job of jobs) {
+      warmPiano(ctx, job.params, job.key, job.freq);
+      if (performance.now() - slice > 12) {
+        await new Promise((r) => setTimeout(r, 0));
+        slice = performance.now();
+      }
+    }
   }
 
   /* ---------- 试音 ---------- */

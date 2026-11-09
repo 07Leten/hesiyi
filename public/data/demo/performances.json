@@ -41,5 +41,12 @@
       { "instrumentId": "guqin", "presetId": "qingrun", "gain": 0.7, "octaveShift": -12 }
     ],
     "source": { "kind": "synth", "note": "浏览器实时合成，非真人录音" },
+    "provenance": { "origin": "demo", "revisionStatus": "draft" } },
+  { "id": "perf-cxs-pianoxiao", "scoreId": "demo-changxiangsi-bianshui", "title": "箫与钢琴（现代编配）",
+    "layers": [
+      { "instrumentId": "xiao", "presetId": "zizhu", "gain": 0.7, "octaveShift": 0 },
+      { "instrumentId": "piano", "presetId": "rouyin", "gain": 0.5, "octaveShift": -12 }
+    ],
+    "source": { "kind": "synth", "note": "浏览器实时合成，非真人录音；钢琴为现代编配" },
     "provenance": { "origin": "demo", "revisionStatus": "draft" } }
 ]

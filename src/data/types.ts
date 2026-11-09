@@ -221,7 +221,7 @@ export interface Score {
 
 /* ---------- 乐器与演奏版本 ---------- */
 
-export type SynthEngine = 'pluck' | 'wind' | 'bowed';
+export type SynthEngine = 'pluck' | 'wind' | 'bowed' | 'piano';
 
 export interface InstrumentPreset {
   id: string;
@@ -234,7 +234,7 @@ export interface InstrumentPreset {
 export interface Instrument {
   id: string;
   name: string;
-  family: '弹拨' | '吹管' | '拉弦';
+  family: '弹拨' | '吹管' | '拉弦' | '键盘';
   description: string;
   /** 默认八度移位（以半音计），如古琴 -12 */
   defaultOctaveShift: number;

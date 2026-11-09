@@ -64,5 +64,16 @@
       { "id": "mingkuai", "name": "明快", "description": "揉弦浅，音头干脆", "engine": "bowed",
         "params": { "attack": 0.05, "release": 0.1, "vibratoRate": 6.4, "vibratoDepth": 16, "vibratoDelay": 0.15, "cutoff": 4600, "formant1": 1000, "formant2": 2700, "bowNoise": 0.035, "portamento": 0.04, "level": 0.45, "legato": 1, "glideTime": 0.06 } }
     ]
+  },
+  {
+    "id": "piano", "name": "钢琴", "family": "键盘",
+    "description": "西洋击弦键盘乐器，并非宋词原有的伴奏乐器，此处仅供现代编配与对照聆听。演示音色以失谐泛音、复弦拍音与双段衰减合成；无法滑音，一字多音时逐音击键。",
+    "defaultOctaveShift": 0, "defaultGain": 0.6,
+    "presets": [
+      { "id": "sanjiao", "name": "三角钢琴", "description": "音色明亮饱满，余音较长", "engine": "piano",
+        "params": { "decay": 3.4, "brightness": 0.62, "inharmonicity": 0.0004, "unisonDetune": 1.1, "strikePos": 0.12, "hammer": 0.22, "cutoff": 7500, "sustain": 0.25, "release": 0.12, "level": 0.85, "legato": 0 } },
+      { "id": "rouyin", "name": "柔音", "description": "弱音踏板般的温润音色，适合与箫、琴相和", "engine": "piano",
+        "params": { "decay": 3.8, "brightness": 0.28, "inharmonicity": 0.0003, "unisonDetune": 1.6, "strikePos": 0.14, "hammer": 0.1, "cutoff": 2600, "sustain": 0.55, "release": 0.2, "level": 0.95, "legato": 0 } }
+    ]
   }
 ]
