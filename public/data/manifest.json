@@ -34,7 +34,7 @@
       "id": "restored",
       "label": "唱词清理谱",
       "origin": "restore",
-      "description": "重新识别后的魏氏乐谱，唱词按谱面录入。尚未人工审定，不是文献译谱。",
+      "description": "魏氏乐谱识谱稿，只保留唱词。其中若干首已按重新识别的勘误谱替换，其余仍是原先的清理稿。都还不是审定稿。",
       "base": "restored/",
       "files": {
         "tunePatterns": "tune-patterns.json",
