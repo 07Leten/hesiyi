@@ -17,6 +17,34 @@
       }
     },
     {
+      "id": "predicted",
+      "label": "模型预测谱",
+      "origin": "model",
+      "description": "由模型预测得到的旋律，同一词牌常有两份。不是文献译谱，也未经人工审定。",
+      "base": "predicted/",
+      "files": {
+        "tunePatterns": "tune-patterns.json",
+        "authors": "authors.json",
+        "poems": "poems.json",
+        "scores": "scores.json",
+        "performances": "performances.json"
+      }
+    },
+    {
+      "id": "restored",
+      "label": "唱词清理谱",
+      "origin": "restore",
+      "description": "魏氏乐谱识谱稿，只保留唱词。待复核与未人工复核都还不是审定稿；028、189 只有图片，没有导入。",
+      "base": "restored/",
+      "files": {
+        "tunePatterns": "tune-patterns.json",
+        "authors": "authors.json",
+        "poems": "poems.json",
+        "scores": "scores.json",
+        "performances": "performances.json"
+      }
+    },
+    {
       "id": "weishi",
       "label": "《魏氏乐谱今译》文献数据包（待导入）",
       "origin": "literature",

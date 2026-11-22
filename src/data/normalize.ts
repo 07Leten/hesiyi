@@ -31,6 +31,15 @@ export function normalizeScore(rec: ScoreRecord, packId: string, issues: DataIss
 
   if (rec.notes?.length) {
     notes = rec.notes.map((n, i) => ({ ...n, index: i, id: n.id || `${rec.id}-n${i}` }));
+    let barStart = 0;
+    let currentBar = 0;
+    for (const n of notes) {
+      if (n.bar !== currentBar) {
+        currentBar = n.bar;
+        barStart = n.startBeat;
+      }
+      if (!n.gongche) n.gongche = deriveGongche(n.pitch, shangDegree, banyanAt(n.startBeat - barStart));
+    }
     const last = notes[notes.length - 1];
     totalBeats = last ? last.startBeat + last.duration : 0;
   } else if (rec.jianpu) {

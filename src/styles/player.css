@@ -297,6 +297,16 @@
   background: rgba(255, 255, 255, 0.08);
 }
 
+.rack-card.is-gap {
+  opacity: 0.55;
+}
+
+.rack-gap {
+  margin: 0;
+  color: rgba(226, 229, 223, 0.55);
+  font-size: 0.78rem;
+}
+
 .rack-card header {
   display: flex;
   justify-content: space-between;

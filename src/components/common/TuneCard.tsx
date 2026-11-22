@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useRepo } from '../../data/DataContext';
+import { scoreOriginLabel } from '../../data/repository';
 import type { TunePattern } from '../../data/types';
 
 export function TuneCard({ tune }: { tune: TunePattern }) {
@@ -21,10 +22,10 @@ export function TuneCard({ tune }: { tune: TunePattern }) {
         <div className="tune-card-foot">
           <span className={st.scoreCount ? 'has-score' : 'no-score'}>
             {st.scoreCount ? `曲谱 ${st.scoreCount}` : '暂无曲谱'}
-            {st.scoreCount > 0 && st.literatureScoreCount === 0 && <em>（演示）</em>}
+            {st.scoreCount > 0 && <em>{scoreOriginLabel(st)}</em>}
           </span>
           <span className={st.playableLiterature ? 'playable lit' : st.playable ? 'playable' : 'unplayable'}>
-            {st.playableLiterature ? '可播放历史曲谱' : st.playable ? '可播放演示曲谱' : '无可播放历史曲谱'}
+            {st.playableLiterature ? '可播放历史曲谱' : st.playable ? '可播放' : '暂无可播放曲谱'}
           </span>
         </div>
       </div>

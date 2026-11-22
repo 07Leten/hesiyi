@@ -4,7 +4,7 @@ import type {
 } from './types';
 
 export type SearchField = 'all' | 'tune' | 'author' | 'poem';
-export type ScoreFilter = 'any' | 'has' | 'literature' | 'none';
+export type ScoreFilter = 'any' | 'has' | 'literature' | 'model' | 'restore' | 'none';
 
 export interface LibraryQuery {
   text: string;
@@ -22,10 +22,21 @@ export interface TuneStats {
   scoreCount: number;
   literatureScoreCount: number;
   demoScoreCount: number;
+  modelScoreCount: number;
+  restoreScoreCount: number;
   playable: boolean;
   playableLiterature: boolean;
   authors: Author[];
   dynasties: Dynasty[];
+}
+
+export function scoreOriginLabel(st: TuneStats): string {
+  const parts: string[] = [];
+  if (st.literatureScoreCount) parts.push('文献');
+  if (st.restoreScoreCount) parts.push('唱词清理');
+  if (st.modelScoreCount) parts.push('模型预测');
+  if (st.demoScoreCount) parts.push('演示');
+  return parts.length ? `（${parts.join('、')}）` : '';
 }
 
 export interface SearchResult {
@@ -88,6 +99,8 @@ export class Repository {
       scoreCount: scores.length,
       literatureScoreCount: lit.length,
       demoScoreCount: scores.filter((s) => s.provenance.origin === 'demo').length,
+      modelScoreCount: scores.filter((s) => s.provenance.origin === 'model').length,
+      restoreScoreCount: scores.filter((s) => s.provenance.origin === 'restore').length,
       playable: scores.some(isPlayable),
       playableLiterature: lit.some(isPlayable),
       authors: authorIds.map((id) => this.authorById.get(id)).filter((a): a is Author => Boolean(a)),
@@ -126,6 +139,8 @@ export class Repository {
     if (q.maxWords && (!t.wordCount || t.wordCount > q.maxWords)) return false;
     if (q.score === 'has' && st.scoreCount === 0) return false;
     if (q.score === 'literature' && st.literatureScoreCount === 0) return false;
+    if (q.score === 'model' && st.modelScoreCount === 0) return false;
+    if (q.score === 'restore' && st.restoreScoreCount === 0) return false;
     if (q.score === 'none' && st.scoreCount > 0) return false;
     if (q.playableOnly && !st.playable) return false;
     return true;
@@ -141,6 +156,8 @@ export class Repository {
       if (q.playableOnly && !this.scoresByPoem(p.id).some(isPlayable)) return false;
       if (q.score === 'has' && this.scoresByPoem(p.id).length === 0) return false;
       if (q.score === 'literature' && !this.scoresByPoem(p.id).some((s) => s.provenance.origin === 'literature')) return false;
+      if (q.score === 'model' && !this.scoresByPoem(p.id).some((s) => s.provenance.origin === 'model')) return false;
+      if (q.score === 'restore' && !this.scoresByPoem(p.id).some((s) => s.provenance.origin === 'restore')) return false;
       if (q.score === 'none' && this.scoresByPoem(p.id).length > 0) return false;
       if (!text) return true;
       const t = this.tuneById.get(p.tunePatternId);

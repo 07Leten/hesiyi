@@ -8,12 +8,14 @@ import { useRepo } from '../data/DataContext';
 import type { LibraryQuery, ScoreFilter, SearchField } from '../data/repository';
 import type { Dynasty, FormType } from '../data/types';
 
-const DYNASTIES: Dynasty[] = ['唐', '五代', '宋'];
+const DYNASTIES: Dynasty[] = ['唐', '五代', '宋', '明', '近现代'];
 const FORMS: FormType[] = ['小令', '中调', '长调'];
 const SCORE_OPTS: { v: ScoreFilter; label: string }[] = [
   { v: 'any', label: '不限' },
   { v: 'has', label: '已录入曲谱' },
   { v: 'literature', label: '有文献曲谱' },
+  { v: 'model', label: '有模型预测谱' },
+  { v: 'restore', label: '有唱词清理谱' },
   { v: 'none', label: '暂无曲谱' },
 ];
 
@@ -132,7 +134,7 @@ export function LibraryPage() {
               词作 <em>{result.poems.length}</em>
             </button>
             <span className="tabs-note">
-              当前为演示数据，曲谱均为演示旋律 · <Link to="/about">说明</Link>
+              演示、模型预测和唱词清理都会标明来源，都不是已审定的文献译谱 · <Link to="/about">说明</Link>
             </span>
           </div>
 

@@ -30,13 +30,27 @@ function covers(inst: Instrument, shift: number, notes: number[]) {
 export function InstrumentRack({ instruments, layers, onChange, performances, activePerformanceId, onPerformance, tonicMidi = 62, noteMidis = [] }: Props) {
   useEffect(() => {
     if (!noteMidis.length) return;
-    const fixed = layers.map((layer) => {
+    const playable = (inst: Instrument) => OCTAVES.some((o) => covers(inst, o.v, noteMidis));
+    let next = layers.map((layer) => {
       const inst = instruments.find((i) => i.id === layer.instrumentId);
-      if (!inst || covers(inst, layer.octaveShift, noteMidis)) return layer;
-      const fallback = OCTAVES.find((o) => covers(inst, o.v, noteMidis))?.v ?? 0;
+      if (!inst) return layer;
+      if (!playable(inst)) return layer.enabled ? { ...layer, enabled: false } : layer;
+      if (covers(inst, layer.octaveShift, noteMidis)) return layer;
+      const fallback = OCTAVES.find((o) => covers(inst, o.v, noteMidis))!.v;
       return { ...layer, octaveShift: fallback };
     });
-    if (fixed.some((layer, i) => layer.octaveShift !== layers[i].octaveShift)) onChange(fixed);
+    if (!next.some((l) => l.enabled)) {
+      const idx = next.findIndex((layer) => {
+        const inst = instruments.find((i) => i.id === layer.instrumentId);
+        return Boolean(inst && playable(inst));
+      });
+      if (idx >= 0) {
+        const inst = instruments.find((i) => i.id === next[idx].instrumentId)!;
+        const fallback = OCTAVES.find((o) => covers(inst, o.v, noteMidis))!.v;
+        next = next.map((l, i) => (i === idx ? { ...l, enabled: true, octaveShift: fallback } : l));
+      }
+    }
+    if (next.some((layer, i) => layer.enabled !== layers[i].enabled || layer.octaveShift !== layers[i].octaveShift)) onChange(next);
   }, [instruments, layers, noteMidis, onChange]);
 
   const enabledCount = layers.filter((l) => l.enabled).length;
@@ -67,15 +81,17 @@ export function InstrumentRack({ instruments, layers, onChange, performances, ac
           const layer = layers.find((l) => l.instrumentId === inst.id);
           if (!layer) return null;
           const preset = inst.presets.find((p) => p.id === layer.presetId) ?? inst.presets[0];
+          const octaves = OCTAVES.filter((o) => !noteMidis.length || covers(inst, o.v, noteMidis));
+          const canPlay = octaves.length > 0;
           const lastOne = layer.enabled && enabledCount === 1;
           return (
-            <section key={inst.id} className={`rack-card${layer.enabled ? ' is-on' : ''}`}>
+            <section key={inst.id} className={`rack-card${layer.enabled ? ' is-on' : ''}${canPlay ? '' : ' is-gap'}`}>
               <header>
-                <label className="rack-toggle" title={lastOne ? '至少保留一件乐器' : undefined}>
+                <label className="rack-toggle" title={canPlay ? (lastOne ? '至少保留一件乐器' : undefined) : '这段录音盖不住这首曲子的每一个音'}>
                   <input
                     type="checkbox"
-                    checked={layer.enabled}
-                    disabled={lastOne}
+                    checked={layer.enabled && canPlay}
+                    disabled={lastOne || !canPlay}
                     onChange={(e) => update(inst.id, { enabled: e.target.checked })}
                   />
                   <span className="rack-name">{inst.name}</span>
@@ -122,16 +138,20 @@ export function InstrumentRack({ instruments, layers, onChange, performances, ac
                     onChange={(e) => update(inst.id, { gain: Number(e.target.value) })}
                   />
                 </label>
-                <label>
-                  <span>音区</span>
-                  <select value={layer.octaveShift} onChange={(e) => update(inst.id, { octaveShift: Number(e.target.value) })}>
-                    {OCTAVES.filter((o) => !noteMidis.length || covers(inst, o.v, noteMidis)).map((o) => (
-                      <option key={o.v} value={o.v}>
-                        {o.label}
-                      </option>
-                    ))}
-                  </select>
-                </label>
+                {canPlay ? (
+                  <label>
+                    <span>音区</span>
+                    <select value={layer.octaveShift} onChange={(e) => update(inst.id, { octaveShift: Number(e.target.value) })}>
+                      {octaves.map((o) => (
+                        <option key={o.v} value={o.v}>
+                          {o.label}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                ) : (
+                  <p className="rack-gap">盖不住全曲</p>
+                )}
               </div>
             </section>
           );

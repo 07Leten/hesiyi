@@ -224,7 +224,11 @@ export function PoemPage() {
               </p>
 
               {mode !== 'jianpu' && score.notation.gongcheDerived && (
-                <p className="score-caveat">工尺字按{score.key.gongcheKey ?? '小工调'}由简谱推导，板眼只标在出音处；工尺谱与简谱并非一一对应，文献原谱以导入数据为准。</p>
+                <p className="score-caveat">
+                  {score.key.gongcheKey
+                    ? `工尺字按${score.key.gongcheKey}由简谱推导，板眼只标在出音处；工尺谱与简谱并非一一对应。`
+                    : '工尺字由简谱级数推导，没有改写成传统工尺调名；板眼只标在出音处。'}
+                </p>
               )}
               {showTones && score.toneSystem && (
                 <p className="score-caveat">字角小圈为「四声圈发」：平声在左下，上声在左上，去声在右上，入声在右下。依据：{score.toneSystem}。</p>

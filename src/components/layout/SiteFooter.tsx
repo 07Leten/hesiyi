@@ -6,7 +6,7 @@ export function SiteFooter() {
       <div className="site-footer-inner">
         <p className="site-footer-motto">依谱寻声，使旧词可听。</p>
         <p>
-          当前为前端演示版本。曲库中的曲谱均为演示旋律，并非历史文献；文献曲谱将在导入《魏氏乐谱今译》后另行标注。
+          当前为前端演示版本。演示、模型预测和唱词清理都会标明来源，都不是已审定的文献译谱。
           <Link to="/about">数据说明</Link>
         </p>
         <p className="site-footer-small">

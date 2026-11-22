@@ -5,8 +5,8 @@
  * 或未来的后端 API，经 normalize 后进入内存。
  */
 
-/** 数据来源类型：文献 / 演示 / AI 创作 / 规则生成（非 AI） */
-export type DataOrigin = 'literature' | 'demo' | 'ai' | 'rule';
+/** 数据来源类型：文献 / 演示 / 模型预测 / 唱词清理 / AI 创作 / 规则生成（非 AI） */
+export type DataOrigin = 'literature' | 'demo' | 'model' | 'restore' | 'ai' | 'rule';
 
 /** 校订状态 */
 export type RevisionStatus = 'unverified' | 'draft' | 'proofread' | 'verified';

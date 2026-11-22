@@ -7,7 +7,6 @@ import { SearchBox } from '../components/common/SearchBox';
 import { VerticalPoem } from '../components/common/VerticalPoem';
 import { ScoreView } from '../components/score/ScoreView';
 import { useRepo } from '../data/DataContext';
-import { isPlayable } from '../data/repository';
 import type { FormType, Score } from '../data/types';
 import { usePlayer } from '../player/PlayerContext';
 import { useActiveNote } from '../player/usePlayback';
@@ -63,7 +62,11 @@ export function HomePage() {
   const isPlaying = (s: Score) => player.score?.id === s.id && player.state.playing;
 
   const hot = repo.data.tunePatterns.filter((t) => t.tags?.includes('常见')).slice(0, 4);
-  const playable = repo.playableScores();
+  const featured = useMemo(() => {
+    const all = repo.playableScores();
+    const take = (origin: Score['provenance']['origin'], n: number) => all.filter((s) => s.provenance.origin === origin).slice(0, n);
+    return [...take('demo', 3), ...take('model', 3), ...take('restore', 3)];
+  }, [repo]);
 
   return (
     <div className="home">
@@ -209,7 +212,7 @@ export function HomePage() {
           </Link>
         </header>
         <div className="rec-grid">
-          {playable.map((s) => {
+          {featured.map((s) => {
             const poem = repo.poem(s.poemId)!;
             const tune = repo.tune(s.tunePatternId);
             const author = repo.author(poem.authorId);
@@ -231,9 +234,7 @@ export function HomePage() {
             );
           })}
         </div>
-        {repo.data.scores.filter(isPlayable).every((s) => s.provenance.origin !== 'literature') && (
-          <p className="forms-note">文献曲谱尚未导入，目前展示的均为演示曲谱。</p>
-        )}
+        <p className="forms-note">上面只放了几首方便试听。模型预测谱和唱词清理谱都在曲库里，尚未人工审定，不能当成文献译谱。</p>
       </section>
 
       <section className="sec">

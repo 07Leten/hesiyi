@@ -4,7 +4,7 @@ import { OriginBadge, RevisionBadge } from '../components/common/Badges';
 import { MeterView } from '../components/common/MeterView';
 import { PoemRow } from '../components/common/PoemRow';
 import { useRepo } from '../data/DataContext';
-import { isPlayable } from '../data/repository';
+import { isPlayable, scoreOriginLabel } from '../data/repository';
 import { NotFound } from './NotFound';
 
 export function TunePage() {
@@ -52,7 +52,7 @@ export function TunePage() {
               <dt>曲谱</dt>
               <dd>
                 {st.scoreCount ? `${st.scoreCount} 份` : '暂无'}
-                {st.scoreCount > 0 && st.literatureScoreCount === 0 && '（均为演示）'}
+                {scoreOriginLabel(st)}
               </dd>
             </div>
           </dl>
@@ -110,7 +110,9 @@ export function TunePage() {
             ) : (
               <p className="muted">暂无曲谱。</p>
             )}
-            {st.literatureScoreCount === 0 && <AiPrompt tuneId={tune.id} hasDemo={st.scoreCount > 0} />}
+            {st.literatureScoreCount === 0 && st.modelScoreCount === 0 && st.restoreScoreCount === 0 && (
+              <AiPrompt tuneId={tune.id} hasDemo={st.demoScoreCount > 0} />
+            )}
           </section>
 
           <section className="block">
