@@ -10,7 +10,7 @@
   { "id": "perf-rml-both", "scoreId": "demo-rumengling-changji", "title": "箫与钢琴",
     "layers": [
       { "instrumentId": "xiao", "presetId": "zizhu", "gain": 0.65, "octaveShift": 0 },
-      { "instrumentId": "piano", "presetId": "rouyin", "gain": 0.45, "octaveShift": 0 }
+      { "instrumentId": "piano", "presetId": "sanjiao", "gain": 0.45, "octaveShift": 0 }
     ],
     "source": { "kind": "sample", "note": "两件乐器都能覆盖曲中全部音高" },
     "provenance": { "origin": "demo", "revisionStatus": "draft" } },
@@ -35,8 +35,8 @@
   { "id": "perf-cxs-both", "scoreId": "demo-changxiangsi-bianshui", "title": "箫与钢琴",
     "layers": [
       { "instrumentId": "xiao", "presetId": "zizhu", "gain": 0.7, "octaveShift": 0 },
-      { "instrumentId": "piano", "presetId": "rouyin", "gain": 0.45, "octaveShift": -12 }
+      { "instrumentId": "piano", "presetId": "sanjiao", "gain": 0.45, "octaveShift": -12 }
     ],
-    "source": { "kind": "sample", "note": "钢琴用低八度那一组录音，没有变速；两件乐器都能覆盖曲中全部音高" },
+    "source": { "kind": "sample", "note": "钢琴用低八度那一组自己的录音，没有变速" },
     "provenance": { "origin": "demo", "revisionStatus": "draft" } }
 ]

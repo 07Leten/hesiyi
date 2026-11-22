@@ -36,6 +36,7 @@ export class PlaybackEngine {
   private nextIdx = 0;
   private timer: ReturnType<typeof setInterval> | null = null;
   private playGen = 0;
+  private layerGen = 0;
 
   private voices = new Map<string, Set<Voice>>();
   private lastVoice = new Map<string, Voice>();
@@ -97,24 +98,57 @@ export class PlaybackEngine {
   }
 
   setLayers(layers: ResolvedLayer[]) {
-    const enabled = new Set(layers.filter((l) => l.enabled).map((l) => l.instrumentId));
+    const token = ++this.layerGen;
+    const fresh = layers.filter((l) => {
+      if (!l.enabled) return false;
+      const prev = this.layers.find((p) => p.instrumentId === l.instrumentId);
+      return !prev?.enabled || prev.preset.id !== l.preset.id || prev.octaveShift !== l.octaveShift;
+    });
     if (this.ctx) {
       const now = this.ctx.currentTime;
       for (const [id, set] of this.voices) {
-        if (!enabled.has(id)) {
+        const next = layers.find((l) => l.instrumentId === id);
+        const prev = this.layers.find((l) => l.instrumentId === id);
+        const dropped = !next?.enabled || (prev && next && (prev.preset.id !== next.preset.id || prev.octaveShift !== next.octaveShift));
+        if (dropped) {
           set.forEach((v) => v.stop(now));
           set.clear();
           this.lastVoice.delete(id);
         }
       }
-      for (const l of layers) this.layerNode(l.instrumentId).gain.setTargetAtTime(l.gain, now, 0.03);
+      for (const l of layers) if (l.enabled) this.layerNode(l.instrumentId).gain.setTargetAtTime(l.gain, now, 0.03);
     }
-    const changedPreset = layers.some((l) => {
-      const prev = this.layers.find((p) => p.instrumentId === l.instrumentId);
-      return prev && prev.preset.id !== l.preset.id;
-    });
-    if (changedPreset) this.lastVoice.clear();
     this.layers = layers;
+    if (this.state.playing && fresh.length) void this.joinLayers(fresh, token);
+  }
+
+  /** 播放中新加入的乐器，补上正在响的音和已经排进前瞻窗口的音 */
+  private async joinLayers(fresh: ResolvedLayer[], token: number) {
+    const ctx = this.ctx;
+    if (!ctx) return;
+    await preloadPresets(ctx, fresh.map((l) => l.preset));
+    if (token !== this.layerGen || !this.state.playing || this.ctx !== ctx) return;
+    const active = fresh.filter((l) => this.layers.some((p) => p.instrumentId === l.instrumentId && p.enabled && p.preset.id === l.preset.id && p.octaveShift === l.octaveShift));
+    if (!active.length) return;
+    const now = ctx.currentTime;
+    const beat = this.getBeat();
+    const bps = this.bps;
+    const horizon = now + (document.hidden ? 1.6 : 0.25);
+    for (const ev of this.events) {
+      const endBeat = ev.startBeat + ev.durBeats;
+      if (endBeat <= beat + 0.02) continue;
+      const startTime = this.anchorTime + (ev.startBeat - this.anchorBeat) / bps;
+      if (startTime > horizon) break;
+      const when = Math.max(startTime, now + 0.015);
+      const beatAtWhen = this.anchorBeat + (when - this.anchorTime) * bps;
+      const remaining = endBeat - beatAtWhen;
+      if (remaining < 0.03) continue;
+      playEventOnLayers(ctx, ev, when, remaining / bps, active, (id) => this.layerNode(id), this.lastVoice, (id, v) => {
+        let set = this.voices.get(id);
+        if (!set) this.voices.set(id, (set = new Set()));
+        set.add(v);
+      });
+    }
   }
 
   /* ---------- 走带 ---------- */
@@ -149,7 +183,7 @@ export class PlaybackEngine {
     const ctx = this.ensureContext();
     if (ctx.state !== 'running') await ctx.resume();
     if (gen !== this.playGen) return;
-    await preloadPresets(ctx, this.layers.filter((l) => l.enabled).map((l) => l.preset));
+    await preloadPresets(ctx, this.layers.map((l) => l.preset));
     if (gen !== this.playGen) return;
     for (const l of this.layers) this.layerNode(l.instrumentId).gain.value = l.gain;
     if (this.pausedBeat >= this.totalBeats - 1e-6) this.pausedBeat = 0;

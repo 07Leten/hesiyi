@@ -18,9 +18,7 @@
     "sampleLow": 33, "sampleHigh": 96,
     "presets": [
       { "id": "sanjiao", "name": "三角钢琴", "description": "原录音", "engine": "sample", "bank": "piano",
-        "params": { "attack": 0.004, "release": 0.35, "level": 0.8, "legato": 0 } },
-      { "id": "rouyin", "name": "柔音", "description": "同一套录音，收一点高音", "engine": "sample", "bank": "piano",
-        "params": { "attack": 0.004, "release": 0.45, "level": 0.75, "cutoff": 2400, "legato": 0 } }
+        "params": { "attack": 0.004, "release": 0.35, "level": 0.8, "legato": 0 } }
     ]
   }
 ]
