@@ -1,30 +1,9 @@
 [
   {
-    "id": "guzheng", "name": "古筝", "family": "弹拨",
-    "description": "只保留录音基频与音高一致的音。没有这一音的录音就不响，不用别的音变速去顶。",
-    "defaultOctaveShift": 0, "defaultGain": 0.75,
-    "presets": [
-      { "id": "mingliang", "name": "拨弦", "description": "对准音高的原录音", "engine": "sample", "bank": "guzheng",
-        "params": { "attack": 0.004, "release": 0.5, "level": 0.9, "legato": 0 } },
-      { "id": "rouhe", "name": "柔和", "description": "同一批录音，收一点高音", "engine": "sample", "bank": "guzheng",
-        "params": { "attack": 0.006, "release": 0.55, "level": 0.85, "cutoff": 3200, "legato": 0 } }
-    ]
-  },
-  {
-    "id": "dizi", "name": "竹笛", "family": "吹管",
-    "description": "示范录音里只留下和标准音高相差不到三十分的音。偏得更多的已经去掉，也不再用邻近的音变速。",
-    "defaultOctaveShift": 12, "defaultGain": 0.45,
-    "presets": [
-      { "id": "qudi", "name": "曲笛", "description": "对准的原录音", "engine": "sample", "bank": "dizi",
-        "params": { "attack": 0.04, "release": 0.16, "level": 0.7, "legato": 0 } },
-      { "id": "bangdi", "name": "梆笛", "description": "同一录音，保留高音", "engine": "sample", "bank": "dizi",
-        "params": { "attack": 0.03, "release": 0.12, "level": 0.62, "legato": 0 } }
-    ]
-  },
-  {
     "id": "xiao", "name": "洞箫", "family": "吹管",
-    "description": "没有洞箫逐音录音。这里是 FluidR3 的尺八，每个音各有一条录音，按原速播放。尺八是竖吹竹管，不是洞箫。",
+    "description": "没有洞箫逐音录音。这里是 FluidR3 的尺八，每个音各有一条录音，按原速播放。尺八是竖吹竹管，不是洞箫。现有曲谱里的每个音它都有。",
     "defaultOctaveShift": 0, "defaultGain": 0.7,
+    "sampleLow": 57, "sampleHigh": 88,
     "presets": [
       { "id": "zizhu", "name": "紫竹", "description": "尺八原采样", "engine": "sample", "bank": "xiao",
         "params": { "attack": 0.06, "release": 0.18, "level": 0.8, "legato": 0 } },
@@ -33,20 +12,10 @@
     ]
   },
   {
-    "id": "erhu", "name": "二胡", "family": "拉弦",
-    "description": "逐音录音。原先整套标低了八度，已按实际音高改正，播放时不再变速。",
-    "defaultOctaveShift": 0, "defaultGain": 0.55,
-    "presets": [
-      { "id": "shuqing", "name": "长弓", "description": "持续运弓的录音", "engine": "sample", "bank": "erhu-long",
-        "params": { "attack": 0.06, "release": 0.14, "level": 0.7, "legato": 0 } },
-      { "id": "mingkuai", "name": "短弓", "description": "短促的拉奏", "engine": "sample", "bank": "erhu-short",
-        "params": { "attack": 0.02, "release": 0.1, "level": 0.65, "legato": 0 } }
-    ]
-  },
-  {
     "id": "piano", "name": "钢琴", "family": "键盘",
-    "description": "Yamaha C5 三角钢琴，每个音各有录音。供现代编配对照。",
+    "description": "Yamaha C5 三角钢琴，每个音各有录音，能覆盖现有曲谱的全部音高。供现代编配对照。",
     "defaultOctaveShift": 0, "defaultGain": 0.6,
+    "sampleLow": 33, "sampleHigh": 96,
     "presets": [
       { "id": "sanjiao", "name": "三角钢琴", "description": "原录音", "engine": "sample", "bank": "piano",
         "params": { "attack": 0.004, "release": 0.35, "level": 0.8, "legato": 0 } },

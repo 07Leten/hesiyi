@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRepo } from '../../data/DataContext';
+import { pitchToMidi } from '../../data/notation/pitch';
 import type { Score } from '../../data/types';
 import { usePlayer } from '../../player/PlayerContext';
 import { IconClose, IconInstruments, IconLoop, IconMute, IconNext, IconPause, IconPlay, IconPrev, IconVolume } from '../common/Icons';
@@ -26,6 +27,15 @@ export function PlayerPanel({ score, navigateOnStep = true, label }: Props) {
 
   const isCurrent = player.score?.id === score.id;
   const playing = isCurrent && player.state.playing;
+  const noteMidis = useMemo(() => {
+    const found = new Set<number>();
+    for (const n of score.notes) {
+      if (n.isRest) continue;
+      const midi = pitchToMidi(n.pitch, score.key.tonicMidi);
+      if (midi != null) found.add(midi);
+    }
+    return [...found];
+  }, [score]);
   const perfs = repo.performancesByScore(score.id);
   const activePerf = perfs.find((p) => p.id === player.performanceId);
   const ensemble = player.layers
@@ -69,6 +79,7 @@ export function PlayerPanel({ score, navigateOnStep = true, label }: Props) {
             instruments={repo.data.instruments}
             layers={player.layers}
             tonicMidi={score.key.tonicMidi}
+            noteMidis={noteMidis}
             performances={perfs}
             activePerformanceId={isCurrent ? player.performanceId : null}
             onPerformance={(p) => {

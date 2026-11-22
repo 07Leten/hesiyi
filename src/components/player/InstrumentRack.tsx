@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { engine } from '../../audio/engine';
 import type { LayerConfig } from '../../audio/sequence';
 import type { Instrument, Performance } from '../../data/types';
@@ -12,6 +13,8 @@ interface Props {
   onPerformance?: (p: Performance) => void;
   /** 试音的参考音高（曲谱主音） */
   tonicMidi?: number;
+  /** 这首曲谱里实际出现的音，用来关掉盖不住全曲的音区 */
+  noteMidis?: number[];
 }
 
 const OCTAVES = [
@@ -20,7 +23,22 @@ const OCTAVES = [
   { v: 12, label: '高八度' },
 ];
 
-export function InstrumentRack({ instruments, layers, onChange, performances, activePerformanceId, onPerformance, tonicMidi = 62 }: Props) {
+function covers(inst: Instrument, shift: number, notes: number[]) {
+  return notes.every((n) => n + shift >= inst.sampleLow && n + shift <= inst.sampleHigh);
+}
+
+export function InstrumentRack({ instruments, layers, onChange, performances, activePerformanceId, onPerformance, tonicMidi = 62, noteMidis = [] }: Props) {
+  useEffect(() => {
+    if (!noteMidis.length) return;
+    const fixed = layers.map((layer) => {
+      const inst = instruments.find((i) => i.id === layer.instrumentId);
+      if (!inst || covers(inst, layer.octaveShift, noteMidis)) return layer;
+      const fallback = OCTAVES.find((o) => covers(inst, o.v, noteMidis))?.v ?? 0;
+      return { ...layer, octaveShift: fallback };
+    });
+    if (fixed.some((layer, i) => layer.octaveShift !== layers[i].octaveShift)) onChange(fixed);
+  }, [instruments, layers, noteMidis, onChange]);
+
   const enabledCount = layers.filter((l) => l.enabled).length;
   const update = (id: string, patch: Partial<LayerConfig>) =>
     onChange(layers.map((l) => (l.instrumentId === id ? { ...l, ...patch } : l)));
@@ -107,7 +125,7 @@ export function InstrumentRack({ instruments, layers, onChange, performances, ac
                 <label>
                   <span>音区</span>
                   <select value={layer.octaveShift} onChange={(e) => update(inst.id, { octaveShift: Number(e.target.value) })}>
-                    {OCTAVES.map((o) => (
+                    {OCTAVES.filter((o) => !noteMidis.length || covers(inst, o.v, noteMidis)).map((o) => (
                       <option key={o.v} value={o.v}>
                         {o.label}
                       </option>
@@ -119,7 +137,7 @@ export function InstrumentRack({ instruments, layers, onChange, performances, ac
           );
         })}
       </div>
-      <p className="rack-foot">每个音只用它自己的录音，原速播放。没有录音的音不响。洞箫用的是尺八。出处见「关于」。</p>
+      <p className="rack-foot">这里只留能把整首曲子每个音都奏完的录音。洞箫用的是尺八。出处见「关于」。</p>
     </div>
   );
 }

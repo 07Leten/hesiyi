@@ -241,6 +241,9 @@ export interface Instrument {
   /** 默认选用哪一组录音（以半音计）。只换录音，不把采样变速。 */
   defaultOctaveShift: number;
   defaultGain: number;
+  /** 这套录音实际覆盖的音高（MIDI）。超出范围的音区不提供，避免播到一半没声音。 */
+  sampleLow: number;
+  sampleHigh: number;
   presets: InstrumentPreset[];
 }
 
