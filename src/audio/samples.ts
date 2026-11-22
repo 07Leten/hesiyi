@@ -57,13 +57,10 @@ function freqToMidi(freq: number) {
   return Math.round(69 + 12 * Math.log2(freq / 440));
 }
 
-function nearest(bank: SampleBank, midi: number) {
-  let best: { midi: number; file: string } | null = null;
-  for (const [key, file] of Object.entries(bank.notes)) {
-    const m = Number(key);
-    if (!best || Math.abs(m - midi) < Math.abs(best.midi - midi)) best = { midi: m, file };
-  }
-  return best;
+/** 只认录音本身的音高。没有这一音的采样就空过去，不用别的音变速顶上。 */
+function exact(bank: SampleBank, midi: number) {
+  const file = bank.notes[String(midi)];
+  return file ? { midi, file } : null;
 }
 
 /** 把这些音色要用的录音解码好。实时播放与离线导出都先走这一步 */
@@ -97,7 +94,6 @@ function playOne(
   ctx: BaseAudioContext,
   out: AudioNode,
   buffer: AudioBuffer,
-  root: number,
   midi: number,
   when: number,
   dur: number,
@@ -107,8 +103,7 @@ function playOne(
 ): Voice {
   const src = ctx.createBufferSource();
   src.buffer = buffer;
-  let rate = Math.pow(2, (midi - root) / 12);
-  src.playbackRate.setValueAtTime(rate, when);
+  src.playbackRate.setValueAtTime(1, when);
 
   if (loop && buffer.duration > 0.7) {
     const start = risingZero(buffer, 0.42);
@@ -149,12 +144,8 @@ function playOne(
     get end() {
       return relAt + release;
     },
-    glideTo(freq, at, time) {
-      const next = Math.pow(2, (freqToMidi(freq) - root) / 12);
-      src.playbackRate.setValueAtTime(rate, at);
-      src.playbackRate.linearRampToValueAtTime(next, at + Math.max(0.02, time));
-      rate = next;
-      voice.freq = freq;
+    glideTo() {
+      /* 变速会把这一音改成别的音高，不这样做 */
     },
     extend(newEnd) {
       amp.gain.cancelScheduledValues(relAt);
@@ -174,7 +165,7 @@ function playOne(
 export function sampleVoice(ctx: BaseAudioContext, out: AudioNode, preset: InstrumentPreset, spec: NoteSpec): Voice {
   const bank = banks?.[preset.bank];
   const midi = freqToMidi(spec.freq);
-  const zone = bank ? nearest(bank, midi) : null;
+  const zone = bank ? exact(bank, midi) : null;
   const buffer = zone ? bufferOf(ctx, sampleUrl(bank!, zone.file)) : null;
   if (!bank || !zone || !buffer) return silent(spec.when, spec.freq);
 
@@ -184,7 +175,7 @@ export function sampleVoice(ctx: BaseAudioContext, out: AudioNode, preset: Instr
     const parts: Voice[] = [];
     for (let t = 0; t < spec.dur - step * 0.4; t += step) {
       const vel = spec.velocity * (t === 0 ? 1 : 0.72);
-      parts.push(playOne(ctx, out, buffer, zone.midi, midi, spec.when + t, step * 0.85, vel, preset, false));
+      parts.push(playOne(ctx, out, buffer, midi, spec.when + t, step * 0.85, vel, preset, false));
     }
     const last = parts[parts.length - 1] ?? silent(spec.when, spec.freq);
     return {
@@ -198,5 +189,5 @@ export function sampleVoice(ctx: BaseAudioContext, out: AudioNode, preset: Instr
     };
   }
 
-  return playOne(ctx, out, buffer, zone.midi, midi, spec.when, spec.dur, spec.velocity, preset, bank.loop);
+  return playOne(ctx, out, buffer, midi, spec.when, spec.dur, spec.velocity, preset, bank.loop);
 }

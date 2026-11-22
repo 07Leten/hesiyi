@@ -30,9 +30,9 @@ const TONE_NAMES: ToneCategory[] = ['平', '上', '去', '入'];
 export function LearnPage() {
   const repo = useRepo();
   const player = usePlayer();
-  const qin = repo.instrument('guqin');
+  const piano = repo.instrument('piano');
   const xiao = repo.instrument('xiao');
-  const [voice, setVoice] = useState<'guqin' | 'xiao'>('xiao');
+  const [voice, setVoice] = useState<'piano' | 'xiao'>('piano');
   const table = gongcheTable(1);
   const example = repo.score('demo-rumengling-changji') ?? repo.playableScores()[0];
   const isCurrent = Boolean(example && player.score?.id === example.id);
@@ -46,7 +46,7 @@ export function LearnPage() {
   }, [example]);
 
   const playPitch = (degree: number, octave: number) => {
-    const inst = voice === 'guqin' ? qin : xiao;
+    const inst = voice === 'piano' ? piano : xiao;
     if (!inst) return;
     const midi = pitchToMidi({ degree, octave, accidental: 0 }, 62)!;
     void engine.previewNote(inst.presets[0], inst.id, midi, 1.4);
@@ -80,11 +80,11 @@ export function LearnPage() {
             </p>
             <div className="voice-pick">
               <span>试听音色</span>
+              <button type="button" className={`chip${voice === 'piano' ? ' is-on' : ''}`} onClick={() => setVoice('piano')}>
+                钢琴
+              </button>
               <button type="button" className={`chip${voice === 'xiao' ? ' is-on' : ''}`} onClick={() => setVoice('xiao')}>
                 洞箫
-              </button>
-              <button type="button" className={`chip${voice === 'guqin' ? ' is-on' : ''}`} onClick={() => setVoice('guqin')}>
-                古琴
               </button>
             </div>
             <div className="gc-table" role="list">

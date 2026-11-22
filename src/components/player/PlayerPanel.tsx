@@ -87,7 +87,7 @@ export function PlayerPanel({ score, navigateOnStep = true, label }: Props) {
         <div className="player-info">
           <span className="player-kicker">{label ?? (isCurrent ? (playing ? '正在演奏' : '已就绪') : '未载入')}</span>
           <span className="player-ensemble">
-            {isCurrent ? (activePerf ? activePerf.title : '自定义组合') : perfs[0]?.title ?? '古琴'}
+            {isCurrent ? (activePerf ? activePerf.title : '自定义组合') : perfs[0]?.title ?? '钢琴'}
             <small>{isCurrent ? ensemble : ''}</small>
           </span>
         </div>

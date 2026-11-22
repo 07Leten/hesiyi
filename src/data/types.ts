@@ -238,7 +238,7 @@ export interface Instrument {
   name: string;
   family: '弹拨' | '吹管' | '拉弦' | '键盘';
   description: string;
-  /** 默认八度移位（以半音计），如古琴 -12 */
+  /** 默认选用哪一组录音（以半音计）。只换录音，不把采样变速。 */
   defaultOctaveShift: number;
   defaultGain: number;
   presets: InstrumentPreset[];

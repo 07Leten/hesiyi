@@ -119,7 +119,7 @@ export function InstrumentRack({ instruments, layers, onChange, performances, ac
           );
         })}
       </div>
-      <p className="rack-foot">音色来自开源录音，不是这首曲子的真人演奏。洞箫用的是尺八采样。出处见「关于」。</p>
+      <p className="rack-foot">每个音只用它自己的录音，原速播放。没有录音的音不响。洞箫用的是尺八。出处见「关于」。</p>
     </div>
   );
 }

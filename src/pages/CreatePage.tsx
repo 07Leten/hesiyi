@@ -48,7 +48,7 @@ export function CreatePage() {
   const [customText, setCustomText] = useState('');
   const [style, setStyle] = useState('琴歌');
   const [mood, setMood] = useState('清丽');
-  const [inst, setInst] = useState<string[]>(['guqin', 'xiao']);
+  const [inst, setInst] = useState<string[]>(['piano', 'xiao']);
   const [followMeter, setFollowMeter] = useState(true);
   const [vocal, setVocal] = useState(false);
   const modelConfigured = providers[0].isConfigured();

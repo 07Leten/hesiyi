@@ -50,7 +50,7 @@ export function HomePage() {
   const player = usePlayer();
   const user = useUser();
   const pick = useMemo(() => repo.dailyPick(), [repo]);
-  const qin = repo.instrument('guqin');
+  const piano = repo.instrument('piano');
 
   const isPickCurrent = Boolean(pick && player.score?.id === pick.score.id);
   const active = useActiveNote(pick?.score ?? null, isPickCurrent);
@@ -99,7 +99,7 @@ export function HomePage() {
                   key={o.char}
                   type="button"
                   className="cover-note"
-                  onClick={() => qin && void engine.previewNote(qin.presets[1] ?? qin.presets[0], 'guqin', o.midi, 2)}
+                  onClick={() => piano && void engine.previewNote(piano.presets[0], 'piano', o.midi, 2)}
                   aria-label={`试听工尺字「${o.char}」，相当于简谱低音 ${o.jp}`}
                 >
                   <span className="cover-note-char">{o.char}</span>

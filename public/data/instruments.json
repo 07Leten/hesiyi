@@ -1,78 +1,56 @@
 [
   {
-    "id": "guqin", "name": "古琴", "family": "弹拨",
-    "description": "七弦。用公有领域的古琴演奏录音按起音切开，缺的音高由邻近采样变速。一字多音时不重新拨弦，只把音高滑过去。",
-    "defaultOctaveShift": -12, "defaultGain": 0.85,
-    "presets": [
-      { "id": "songchen", "name": "松沉", "description": "原录音，余韵较长", "engine": "sample", "bank": "guqin",
-        "params": { "attack": 0.008, "release": 0.55, "level": 0.95, "legato": 1, "glideTime": 0.12 } },
-      { "id": "qingrun", "name": "清润", "description": "同一批录音，收掉一些低沉的共鸣", "engine": "sample", "bank": "guqin",
-        "params": { "attack": 0.006, "release": 0.4, "level": 0.9, "cutoff": 3800, "legato": 1, "glideTime": 0.08 } }
-    ]
-  },
-  {
     "id": "guzheng", "name": "古筝", "family": "弹拨",
-    "description": "古筝录音（CC0），按音高整理。相邻音之间最多差几度，由播放速度补上。",
-    "defaultOctaveShift": 0, "defaultGain": 0.7,
+    "description": "只保留录音基频与音高一致的音。没有这一音的录音就不响，不用别的音变速去顶。",
+    "defaultOctaveShift": 0, "defaultGain": 0.75,
     "presets": [
-      { "id": "mingliang", "name": "明亮", "description": "原录音", "engine": "sample", "bank": "guzheng",
-        "params": { "attack": 0.004, "release": 0.45, "level": 0.85, "legato": 1, "glideTime": 0.06 } },
-      { "id": "rouhe", "name": "柔和", "description": "同一批录音，压低高音", "engine": "sample", "bank": "guzheng",
-        "params": { "attack": 0.006, "release": 0.55, "level": 0.8, "cutoff": 2800, "legato": 1, "glideTime": 0.08 } }
-    ]
-  },
-  {
-    "id": "pipa", "name": "琵琶", "family": "弹拨",
-    "description": "一段琵琶示范录音（CC BY-SA）。原档几乎只有一个音高，其余音是把这次拨弦变速得到的。轮指是快速重复同一次拨弦。",
-    "defaultOctaveShift": 0, "defaultGain": 0.65,
-    "presets": [
-      { "id": "tantiao", "name": "弹挑", "description": "单次拨弦", "engine": "sample", "bank": "pipa",
-        "params": { "attack": 0.003, "release": 0.28, "level": 0.85, "legato": 0 } },
-      { "id": "lunzhi", "name": "轮指", "description": "长音改为连续拨奏", "engine": "sample", "bank": "pipa",
-        "params": { "attack": 0.003, "release": 0.12, "level": 0.7, "legato": 0, "tremoloRate": 11, "tremoloMin": 0.4 } }
+      { "id": "mingliang", "name": "拨弦", "description": "对准音高的原录音", "engine": "sample", "bank": "guzheng",
+        "params": { "attack": 0.004, "release": 0.5, "level": 0.9, "legato": 0 } },
+      { "id": "rouhe", "name": "柔和", "description": "同一批录音，收一点高音", "engine": "sample", "bank": "guzheng",
+        "params": { "attack": 0.006, "release": 0.55, "level": 0.85, "cutoff": 3200, "legato": 0 } }
     ]
   },
   {
     "id": "dizi", "name": "竹笛", "family": "吹管",
-    "description": "笛子示范录音（CC0）按音切开。曲笛、梆笛是同一支笛子，梆笛收得更亮。",
+    "description": "示范录音里只留下和标准音高相差不到三十分的音。偏得更多的已经去掉，也不再用邻近的音变速。",
     "defaultOctaveShift": 12, "defaultGain": 0.45,
     "presets": [
-      { "id": "qudi", "name": "曲笛", "description": "原录音，稍收高音", "engine": "sample", "bank": "dizi",
-        "params": { "attack": 0.05, "release": 0.16, "level": 0.7, "cutoff": 5200, "legato": 1, "glideTime": 0.05 } },
+      { "id": "qudi", "name": "曲笛", "description": "对准的原录音", "engine": "sample", "bank": "dizi",
+        "params": { "attack": 0.04, "release": 0.16, "level": 0.7, "legato": 0 } },
       { "id": "bangdi", "name": "梆笛", "description": "同一录音，保留高音", "engine": "sample", "bank": "dizi",
-        "params": { "attack": 0.03, "release": 0.12, "level": 0.62, "legato": 1, "glideTime": 0.04 } }
+        "params": { "attack": 0.03, "release": 0.12, "level": 0.62, "legato": 0 } }
     ]
   },
   {
     "id": "xiao", "name": "洞箫", "family": "吹管",
-    "description": "没有找到可再分发的洞箫逐音采样。这里用的是 FluidR3 里的尺八录音：同为竖吹竹管，不是洞箫本身。",
+    "description": "没有洞箫逐音录音。这里是 FluidR3 的尺八，每个音各有一条录音，按原速播放。尺八是竖吹竹管，不是洞箫。",
     "defaultOctaveShift": 0, "defaultGain": 0.7,
     "presets": [
-      { "id": "zizhu", "name": "紫竹", "description": "尺八原采样，气息较重", "engine": "sample", "bank": "xiao",
-        "params": { "attack": 0.09, "release": 0.22, "level": 0.8, "cutoff": 3200, "legato": 1, "glideTime": 0.06 } },
-      { "id": "qingliang", "name": "清亮", "description": "同一批尺八采样，音头更清楚", "engine": "sample", "bank": "xiao",
-        "params": { "attack": 0.05, "release": 0.16, "level": 0.75, "legato": 1, "glideTime": 0.05 } }
+      { "id": "zizhu", "name": "紫竹", "description": "尺八原采样", "engine": "sample", "bank": "xiao",
+        "params": { "attack": 0.06, "release": 0.18, "level": 0.8, "legato": 0 } },
+      { "id": "qingliang", "name": "清亮", "description": "同一批采样，音头更清楚", "engine": "sample", "bank": "xiao",
+        "params": { "attack": 0.04, "release": 0.14, "level": 0.75, "legato": 0 } }
     ]
   },
   {
     "id": "erhu", "name": "二胡", "family": "拉弦",
-    "description": "二胡逐音录音（CC0）。长弓可以连弓滑过去，短弓每音重拉。",
+    "description": "逐音录音。原先整套标低了八度，已按实际音高改正，播放时不再变速。",
     "defaultOctaveShift": 0, "defaultGain": 0.55,
     "presets": [
       { "id": "shuqing", "name": "长弓", "description": "持续运弓的录音", "engine": "sample", "bank": "erhu-long",
-        "params": { "attack": 0.08, "release": 0.16, "level": 0.7, "legato": 1, "glideTime": 0.09 } },
+        "params": { "attack": 0.06, "release": 0.14, "level": 0.7, "legato": 0 } },
       { "id": "mingkuai", "name": "短弓", "description": "短促的拉奏", "engine": "sample", "bank": "erhu-short",
         "params": { "attack": 0.02, "release": 0.1, "level": 0.65, "legato": 0 } }
     ]
   },
   {
     "id": "piano", "name": "钢琴", "family": "键盘",
-    "description": "Yamaha C5 三角钢琴录音（Salamander，CC BY）。供现代编配对照，不是宋词原有的伴奏。无法滑音，一字多音逐音击键。",
+    "description": "Yamaha C5 三角钢琴，每个音各有录音。供现代编配对照。",
     "defaultOctaveShift": 0, "defaultGain": 0.6,
     "presets": [
       { "id": "sanjiao", "name": "三角钢琴", "description": "原录音", "engine": "sample", "bank": "piano",
         "params": { "attack": 0.004, "release": 0.35, "level": 0.8, "legato": 0 } },
-      { "id": "rouyin", "name": "柔音", "description": "同一套录音，压低高音", "engine": "sample", "bank": "piano",
+      { "id": "rouyin", "name": "柔音", "description": "同一套录音，收一点高音", "engine": "sample", "bank": "piano",
         "params": { "attack": 0.004, "release": 0.45, "level": 0.75, "cutoff": 2400, "legato": 0 } }
     ]
   }
