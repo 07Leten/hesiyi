@@ -1,9 +1,9 @@
 """把两套复原谱导入 public/data。
 
 复原示例：模型预测的 MusicXML（同一词牌常有复原 1 / 复原 2）。
-按复核标记-纯唱词版：魏氏乐谱的 MuseScore 文件，只保留唱词。
+识别出的乐谱：重新识别的魏氏乐谱 MuseScore 文件，唱词按谱面录入。
 
-两套都标成未审定，不写入文献来源。028、189 只有图片，没有乐谱，不导入。
+两套都标成未审定，不写入文献来源。唱词清理只收录该目录里的曲目。
 """
 
 from __future__ import annotations
@@ -17,7 +17,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PRED_DIR = Path(r"d:\TEMPS\复原示例")
-REST_DIR = Path(r"d:\TEMPS\按复核标记-纯唱词版")
+REST_DIR = Path(r"D:\TEMPS\识别出的乐谱")
 DEMO_TUNES = ROOT / "public" / "data" / "demo" / "tune-patterns.json"
 OUT_PRED = ROOT / "public" / "data" / "predicted"
 OUT_REST = ROOT / "public" / "data" / "restored"
@@ -793,14 +793,14 @@ def main() -> None:
         sid = f"res-{row['catalog']}"
         tid = take_tune(rest_tunes, seen_rest, row["tune"])
         if row["status"] == "draft":
-            note = "旋律来自既有识谱，这里只保留了唱词。它排在「待复核」里：自动分类不是人工审定。"
+            note = "这份来自重新识别的乐谱。它曾被标成待复核，自动分类不是人工审定。"
         else:
-            note = "旋律来自既有识谱，这里只保留了唱词。它尚未人工复核；没有自动报警也不等于已经核对过。"
+            note = "这份来自重新识别的乐谱，唱词按谱面录入。尚未人工审定，不是文献译谱。"
         if row.get("composer"):
             note += f" 文件里写着「{row['composer']}」，这里不据此改定作者。"
         poem, score, _, perfs, stats = build_piece(
             row, "restore", sid, sid, tid, "weishi-unsigned", "明", row["status"],
-            "魏氏乐谱唱词清理稿", f"{row['catalog']} · {row['detail']}", note, "",
+            "识别出的乐谱", f"{row['catalog']} · {row['tune']}", note, "",
         )
         rest_poems.append(poem)
         rest_scores.append(score)
@@ -819,7 +819,7 @@ def main() -> None:
         "name": "作者未考",
         "dynasty": "明",
         "period": "魏氏乐谱",
-        "bio": "唱词出自《魏氏乐谱》的清理稿。曲集里的作者没有逐首考定，所以不署具体人名。",
+        "bio": "唱词来自重新识别的《魏氏乐谱》。曲集里的作者没有逐首考定，所以不署具体人名。",
         "provenance": {"origin": "restore", "revisionStatus": "unverified", "note": "只标明曲集的时代，不代表每一首的作者已经考定"},
     }
     dump(OUT_PRED, pred_tunes, pred_author, pred_poems, pred_scores, pred_perfs)

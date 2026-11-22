@@ -34,7 +34,7 @@
       "id": "restored",
       "label": "唱词清理谱",
       "origin": "restore",
-      "description": "魏氏乐谱识谱稿，只保留唱词。待复核与未人工复核都还不是审定稿；028、189 只有图片，没有导入。",
+      "description": "重新识别后的魏氏乐谱，唱词按谱面录入。尚未人工审定，不是文献译谱。",
       "base": "restored/",
       "files": {
         "tunePatterns": "tune-patterns.json",

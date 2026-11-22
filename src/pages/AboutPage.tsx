@@ -62,7 +62,7 @@ export function AboutPage() {
             <dt>
               <OriginBadge origin="restore" />
             </dt>
-            <dd>魏氏乐谱的识谱稿，只留下了唱词。标成「初稿」的在待复核目录，标成「未校订」的还没有人工看过。自动分类和「没有报警」都不等于已经审定。</dd>
+            <dd>重新识别后的魏氏乐谱，唱词按谱面录入。尚未人工审定，不是文献译谱。</dd>
           </div>
           <div>
             <dt>
