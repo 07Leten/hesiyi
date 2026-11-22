@@ -1,4 +1,5 @@
 import { buildMaster } from './master';
+import { preloadPresets } from './samples';
 import { playEventOnLayers, type NoteEvent, type ResolvedLayer } from './sequence';
 import type { Voice } from './synth/common';
 
@@ -8,6 +9,7 @@ export async function renderOffline(events: NoteEvent[], totalBeats: number, bpm
   const bps = bpm / 60;
   const seconds = totalBeats / bps + 3;
   const ctx = new OfflineAudioContext(2, Math.ceil(sr * seconds), sr);
+  await preloadPresets(ctx, layers.map((l) => l.preset));
   const bus = buildMaster(ctx, 0.9);
   const nodes = new Map<string, GainNode>();
   for (const l of layers) {

@@ -10,7 +10,7 @@ export function SiteFooter() {
           <Link to="/about">数据说明</Link>
         </p>
         <p className="site-footer-small">
-          字体：思源宋体、霞鹜文楷（SIL OFL）· 音色：浏览器实时合成 ·{' '}
+          字体：思源宋体、霞鹜文楷（SIL OFL）· 音色：开源乐器采样 ·{' '}
           <a href="https://github.com/07Leten/hesiyi" target="_blank" rel="noreferrer">
             源代码
           </a>

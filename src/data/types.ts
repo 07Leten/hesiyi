@@ -221,13 +221,15 @@ export interface Score {
 
 /* ---------- 乐器与演奏版本 ---------- */
 
-export type SynthEngine = 'pluck' | 'wind' | 'bowed' | 'piano';
+export type SynthEngine = 'sample';
 
 export interface InstrumentPreset {
   id: string;
   name: string;
   description: string;
   engine: SynthEngine;
+  /** public/samples/banks.json 里的录音组 */
+  bank: string;
   params: Record<string, number | number[]>;
 }
 
@@ -240,8 +242,6 @@ export interface Instrument {
   defaultOctaveShift: number;
   defaultGain: number;
   presets: InstrumentPreset[];
-  /** 未来接入真实采样时使用 */
-  sampleSet?: { baseUrl: string; notes: Record<string, string> } | null;
 }
 
 export interface PerformanceLayer {
@@ -259,7 +259,7 @@ export interface Performance {
   tempoScale?: number;
   layers: PerformanceLayer[];
   source: {
-    kind: 'synth' | 'recording' | 'ai';
+    kind: 'sample' | 'recording' | 'ai';
     audioUrl?: string;
     performer?: string;
     note: string;

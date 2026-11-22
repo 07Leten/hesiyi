@@ -119,7 +119,7 @@ export function InstrumentRack({ instruments, layers, onChange, performances, ac
           );
         })}
       </div>
-      <p className="rack-foot">以上音色均在浏览器中实时合成，用于演示，并非真实乐器录音。日后可在乐器数据中接入采样音源。</p>
+      <p className="rack-foot">音色来自开源录音，不是这首曲子的真人演奏。洞箫用的是尺八采样。出处见「关于」。</p>
     </div>
   );
 }

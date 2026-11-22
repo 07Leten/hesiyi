@@ -1,79 +1,79 @@
 [
   {
     "id": "guqin", "name": "古琴", "family": "弹拨",
-    "description": "七弦，音色低沉松透。演示音色以拨弦物理模型合成，一字多音时以「走手音」滑至下一音而不重新弹拨。",
-    "defaultOctaveShift": -12, "defaultGain": 0.9,
+    "description": "七弦。用公有领域的古琴演奏录音按起音切开，缺的音高由邻近采样变速。一字多音时不重新拨弦，只把音高滑过去。",
+    "defaultOctaveShift": -12, "defaultGain": 0.85,
     "presets": [
-      { "id": "songchen", "name": "松沉", "description": "按音为主，余韵长，吟猱轻", "engine": "pluck",
-        "params": { "decay": 5.5, "brightness": 0.32, "damping": 0.5, "pluckPos": 0.14, "bodyCutoff": 1700, "level": 1.0, "ring": 1.4, "release": 0.6, "vibratoDepth": 10, "vibratoRate": 4.2, "vibratoDelay": 0.4, "legato": 1, "glideTime": 0.14 } },
-      { "id": "qingrun", "name": "清润", "description": "明亮一些，吟猱更明显", "engine": "pluck",
-        "params": { "decay": 4.2, "brightness": 0.55, "damping": 0.5, "pluckPos": 0.11, "bodyCutoff": 3000, "level": 0.95, "ring": 1.0, "release": 0.45, "vibratoDepth": 22, "vibratoRate": 5, "vibratoDelay": 0.3, "legato": 1, "glideTime": 0.1 } }
+      { "id": "songchen", "name": "松沉", "description": "原录音，余韵较长", "engine": "sample", "bank": "guqin",
+        "params": { "attack": 0.008, "release": 0.55, "level": 0.95, "legato": 1, "glideTime": 0.12 } },
+      { "id": "qingrun", "name": "清润", "description": "同一批录音，收掉一些低沉的共鸣", "engine": "sample", "bank": "guqin",
+        "params": { "attack": 0.006, "release": 0.4, "level": 0.9, "cutoff": 3800, "legato": 1, "glideTime": 0.08 } }
     ]
   },
   {
     "id": "guzheng", "name": "古筝", "family": "弹拨",
-    "description": "音色清亮，余音带有揉弦颤动。演示音色以拨弦物理模型合成。",
+    "description": "古筝录音（CC0），按音高整理。相邻音之间最多差几度，由播放速度补上。",
     "defaultOctaveShift": 0, "defaultGain": 0.7,
     "presets": [
-      { "id": "mingliang", "name": "明亮", "description": "右手近岳山弹奏，颗粒清楚", "engine": "pluck",
-        "params": { "decay": 3.2, "brightness": 0.82, "damping": 0.5, "pluckPos": 0.2, "bodyCutoff": 6000, "level": 0.8, "ring": 0.6, "release": 0.25, "vibratoDepth": 18, "vibratoRate": 5.5, "vibratoDelay": 0.25, "legato": 1, "glideTime": 0.08 } },
-      { "id": "rouhe", "name": "柔和", "description": "远离岳山弹奏，声音圆润", "engine": "pluck",
-        "params": { "decay": 3.6, "brightness": 0.5, "damping": 0.5, "pluckPos": 0.3, "bodyCutoff": 3200, "level": 0.85, "ring": 0.7, "release": 0.3, "vibratoDepth": 14, "vibratoRate": 5, "vibratoDelay": 0.3, "legato": 1, "glideTime": 0.1 } }
+      { "id": "mingliang", "name": "明亮", "description": "原录音", "engine": "sample", "bank": "guzheng",
+        "params": { "attack": 0.004, "release": 0.45, "level": 0.85, "legato": 1, "glideTime": 0.06 } },
+      { "id": "rouhe", "name": "柔和", "description": "同一批录音，压低高音", "engine": "sample", "bank": "guzheng",
+        "params": { "attack": 0.006, "release": 0.55, "level": 0.8, "cutoff": 2800, "legato": 1, "glideTime": 0.08 } }
     ]
   },
   {
     "id": "pipa", "name": "琵琶", "family": "弹拨",
-    "description": "颗粒性强，长音以轮指连续弹奏。演示音色以拨弦物理模型合成。",
-    "defaultOctaveShift": 0, "defaultGain": 0.6,
+    "description": "一段琵琶示范录音（CC BY-SA）。原档几乎只有一个音高，其余音是把这次拨弦变速得到的。轮指是快速重复同一次拨弦。",
+    "defaultOctaveShift": 0, "defaultGain": 0.65,
     "presets": [
-      { "id": "tantiao", "name": "弹挑", "description": "单音弹挑，干净利落", "engine": "pluck",
-        "params": { "decay": 1.5, "brightness": 0.9, "damping": 0.48, "pluckPos": 0.12, "bodyCutoff": 5200, "level": 0.8, "ring": 0.12, "release": 0.08, "vibratoDepth": 0, "vibratoRate": 5, "vibratoDelay": 0.3, "legato": 0, "tremoloRate": 0, "tremoloMin": 99 } },
-      { "id": "lunzhi", "name": "轮指", "description": "超过半秒的长音改用轮指", "engine": "pluck",
-        "params": { "decay": 1.2, "brightness": 0.85, "damping": 0.48, "pluckPos": 0.12, "bodyCutoff": 5200, "level": 0.6, "ring": 0.1, "release": 0.08, "vibratoDepth": 0, "vibratoRate": 5, "vibratoDelay": 0.3, "legato": 0, "tremoloRate": 13, "tremoloMin": 0.45 } }
+      { "id": "tantiao", "name": "弹挑", "description": "单次拨弦", "engine": "sample", "bank": "pipa",
+        "params": { "attack": 0.003, "release": 0.28, "level": 0.85, "legato": 0 } },
+      { "id": "lunzhi", "name": "轮指", "description": "长音改为连续拨奏", "engine": "sample", "bank": "pipa",
+        "params": { "attack": 0.003, "release": 0.12, "level": 0.7, "legato": 0, "tremoloRate": 11, "tremoloMin": 0.4 } }
     ]
   },
   {
     "id": "dizi", "name": "竹笛", "family": "吹管",
-    "description": "横吹，笛膜带来明亮的「嗡」声。演示音色以振荡器、气声与膜振合成。",
+    "description": "笛子示范录音（CC0）按音切开。曲笛、梆笛是同一支笛子，梆笛收得更亮。",
     "defaultOctaveShift": 12, "defaultGain": 0.45,
     "presets": [
-      { "id": "qudi", "name": "曲笛", "description": "管身较长，音色醇厚，昆曲常用", "engine": "wind",
-        "params": { "harmonics": [1, 0.5, 0.32, 0.16, 0.09, 0.05], "breath": 0.1, "breathFreq": 2600, "breathQ": 1.2, "attack": 0.05, "release": 0.14, "vibratoRate": 5.4, "vibratoDepth": 16, "vibratoDelay": 0.28, "buzz": 0.3, "brightness": 7, "level": 0.55, "legato": 1, "glideTime": 0.04 } },
-      { "id": "bangdi", "name": "梆笛", "description": "管身较短，音色高亢清脆", "engine": "wind",
-        "params": { "harmonics": [1, 0.62, 0.45, 0.3, 0.18, 0.1, 0.06], "breath": 0.08, "breathFreq": 3400, "breathQ": 1.2, "attack": 0.03, "release": 0.1, "vibratoRate": 6, "vibratoDepth": 14, "vibratoDelay": 0.22, "buzz": 0.5, "brightness": 10, "level": 0.48, "legato": 1, "glideTime": 0.03 } }
+      { "id": "qudi", "name": "曲笛", "description": "原录音，稍收高音", "engine": "sample", "bank": "dizi",
+        "params": { "attack": 0.05, "release": 0.16, "level": 0.7, "cutoff": 5200, "legato": 1, "glideTime": 0.05 } },
+      { "id": "bangdi", "name": "梆笛", "description": "同一录音，保留高音", "engine": "sample", "bank": "dizi",
+        "params": { "attack": 0.03, "release": 0.12, "level": 0.62, "legato": 1, "glideTime": 0.04 } }
     ]
   },
   {
     "id": "xiao", "name": "洞箫", "family": "吹管",
-    "description": "竖吹，气息声明显，音色幽深。演示音色以振荡器与气声合成。",
+    "description": "没有找到可再分发的洞箫逐音采样。这里用的是 FluidR3 里的尺八录音：同为竖吹竹管，不是洞箫本身。",
     "defaultOctaveShift": 0, "defaultGain": 0.7,
     "presets": [
-      { "id": "zizhu", "name": "紫竹", "description": "气声重，音色幽暗", "engine": "wind",
-        "params": { "harmonics": [1, 0.16, 0.07, 0.03], "breath": 0.22, "breathFreq": 1300, "breathQ": 0.9, "attack": 0.13, "release": 0.28, "vibratoRate": 4.6, "vibratoDepth": 9, "vibratoDelay": 0.45, "buzz": 0, "brightness": 4, "level": 0.75, "legato": 1, "glideTime": 0.06 } },
-      { "id": "qingliang", "name": "清亮", "description": "气声轻，音头更清楚", "engine": "wind",
-        "params": { "harmonics": [1, 0.3, 0.12, 0.05], "breath": 0.13, "breathFreq": 1800, "breathQ": 1, "attack": 0.08, "release": 0.2, "vibratoRate": 5, "vibratoDepth": 12, "vibratoDelay": 0.35, "buzz": 0, "brightness": 5, "level": 0.7, "legato": 1, "glideTime": 0.05 } }
+      { "id": "zizhu", "name": "紫竹", "description": "尺八原采样，气息较重", "engine": "sample", "bank": "xiao",
+        "params": { "attack": 0.09, "release": 0.22, "level": 0.8, "cutoff": 3200, "legato": 1, "glideTime": 0.06 } },
+      { "id": "qingliang", "name": "清亮", "description": "同一批尺八采样，音头更清楚", "engine": "sample", "bank": "xiao",
+        "params": { "attack": 0.05, "release": 0.16, "level": 0.75, "legato": 1, "glideTime": 0.05 } }
     ]
   },
   {
     "id": "erhu", "name": "二胡", "family": "拉弦",
-    "description": "弓擦两弦，揉弦与滑音是其特色。演示音色以锯齿波、共鸣峰与滑音合成。",
-    "defaultOctaveShift": 0, "defaultGain": 0.5,
+    "description": "二胡逐音录音（CC0）。长弓可以连弓滑过去，短弓每音重拉。",
+    "defaultOctaveShift": 0, "defaultGain": 0.55,
     "presets": [
-      { "id": "shuqing", "name": "抒情", "description": "揉弦较深，换音带滑音", "engine": "bowed",
-        "params": { "attack": 0.1, "release": 0.16, "vibratoRate": 5.6, "vibratoDepth": 26, "vibratoDelay": 0.2, "cutoff": 2800, "formant1": 850, "formant2": 2300, "bowNoise": 0.05, "portamento": 0.08, "level": 0.5, "legato": 1, "glideTime": 0.1 } },
-      { "id": "mingkuai", "name": "明快", "description": "揉弦浅，音头干脆", "engine": "bowed",
-        "params": { "attack": 0.05, "release": 0.1, "vibratoRate": 6.4, "vibratoDepth": 16, "vibratoDelay": 0.15, "cutoff": 4600, "formant1": 1000, "formant2": 2700, "bowNoise": 0.035, "portamento": 0.04, "level": 0.45, "legato": 1, "glideTime": 0.06 } }
+      { "id": "shuqing", "name": "长弓", "description": "持续运弓的录音", "engine": "sample", "bank": "erhu-long",
+        "params": { "attack": 0.08, "release": 0.16, "level": 0.7, "legato": 1, "glideTime": 0.09 } },
+      { "id": "mingkuai", "name": "短弓", "description": "短促的拉奏", "engine": "sample", "bank": "erhu-short",
+        "params": { "attack": 0.02, "release": 0.1, "level": 0.65, "legato": 0 } }
     ]
   },
   {
     "id": "piano", "name": "钢琴", "family": "键盘",
-    "description": "西洋击弦键盘乐器，并非宋词原有的伴奏乐器，此处仅供现代编配与对照聆听。演示音色以失谐泛音、复弦拍音与双段衰减合成；无法滑音，一字多音时逐音击键。",
+    "description": "Yamaha C5 三角钢琴录音（Salamander，CC BY）。供现代编配对照，不是宋词原有的伴奏。无法滑音，一字多音逐音击键。",
     "defaultOctaveShift": 0, "defaultGain": 0.6,
     "presets": [
-      { "id": "sanjiao", "name": "三角钢琴", "description": "音色明亮饱满，余音较长", "engine": "piano",
-        "params": { "decay": 3.4, "brightness": 0.62, "inharmonicity": 0.0004, "unisonDetune": 1.1, "strikePos": 0.12, "hammer": 0.22, "cutoff": 7500, "sustain": 0.25, "release": 0.12, "level": 0.85, "legato": 0 } },
-      { "id": "rouyin", "name": "柔音", "description": "弱音踏板般的温润音色，适合与箫、琴相和", "engine": "piano",
-        "params": { "decay": 3.8, "brightness": 0.28, "inharmonicity": 0.0003, "unisonDetune": 1.6, "strikePos": 0.14, "hammer": 0.1, "cutoff": 2600, "sustain": 0.55, "release": 0.2, "level": 0.95, "legato": 0 } }
+      { "id": "sanjiao", "name": "三角钢琴", "description": "原录音", "engine": "sample", "bank": "piano",
+        "params": { "attack": 0.004, "release": 0.35, "level": 0.8, "legato": 0 } },
+      { "id": "rouyin", "name": "柔音", "description": "同一套录音，压低高音", "engine": "sample", "bank": "piano",
+        "params": { "attack": 0.004, "release": 0.45, "level": 0.75, "cutoff": 2400, "legato": 0 } }
     ]
   }
 ]

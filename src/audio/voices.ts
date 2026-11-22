@@ -1,21 +1,9 @@
 import type { InstrumentPreset } from '../data/types';
-import { bowedVoice } from './synth/bowed';
-import { num, type NoteSpec, type Voice } from './synth/common';
-import { pianoVoice } from './synth/piano';
-import { pluckVoice } from './synth/pluck';
-import { windVoice } from './synth/wind';
+import { sampleVoice } from './samples';
+import { num, noiseBuffer, type NoteSpec, type Voice } from './synth/common';
 
-export function startVoice(ctx: BaseAudioContext, out: AudioNode, preset: InstrumentPreset, cacheKey: string, s: NoteSpec): Voice {
-  switch (preset.engine) {
-    case 'pluck':
-      return pluckVoice(ctx, out, preset.params, cacheKey, s);
-    case 'wind':
-      return windVoice(ctx, out, preset.params, s);
-    case 'bowed':
-      return bowedVoice(ctx, out, preset.params, s);
-    case 'piano':
-      return pianoVoice(ctx, out, preset.params, cacheKey, s);
-  }
+export function startVoice(ctx: BaseAudioContext, out: AudioNode, preset: InstrumentPreset, _cacheKey: string, spec: NoteSpec): Voice {
+  return sampleVoice(ctx, out, preset, spec);
 }
 
 export function presetLegato(preset: InstrumentPreset) {
@@ -26,20 +14,20 @@ export function presetGlide(preset: InstrumentPreset) {
   return num(preset.params, 'glideTime', 0.08);
 }
 
-/** 拍板：板眼示范用的击节声 */
+/**
+ * 拍板。这是教学用的击节，不是旋律乐器；用一段极短的噪声，不占用乐器采样。
+ */
 export function clapper(ctx: BaseAudioContext, out: AudioNode, when: number, accent: boolean) {
-  const len = Math.floor(ctx.sampleRate * 0.08);
-  const buf = ctx.createBuffer(1, len, ctx.sampleRate);
-  const d = buf.getChannelData(0);
-  for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.exp(-i / (ctx.sampleRate * 0.012));
   const src = ctx.createBufferSource();
-  src.buffer = buf;
+  src.buffer = noiseBuffer(ctx);
   const bp = ctx.createBiquadFilter();
   bp.type = 'bandpass';
   bp.frequency.value = accent ? 1500 : 2600;
   bp.Q.value = 3;
   const g = ctx.createGain();
-  g.gain.value = accent ? 1.6 : 0.8;
+  g.gain.setValueAtTime(accent ? 1.4 : 0.7, when);
+  g.gain.exponentialRampToValueAtTime(0.001, when + 0.06);
   src.connect(bp).connect(g).connect(out);
   src.start(when);
+  src.stop(when + 0.08);
 }
